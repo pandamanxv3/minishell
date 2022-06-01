@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:04:32 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/31 19:39:12 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:48:57 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int copy_var(char *copy, int i, char *str)
 	}
 	if (str[g_shell.tab_proc[i].index++] == '?')
 		return (itoa_remixed(copy));
-	while ((ft_isalnum(str[g_shell.tab_proc[i].index]) == 1 || str[g_shell.tab_proc[i].index] == '_') && str[g_shell.tab_proc[i].index])
+	while (str[g_shell.tab_proc[i].index] && (ft_isalnum(str[g_shell.tab_proc[i].index]) == 1 || str[g_shell.tab_proc[i].index] == '_'))
 		g_shell.tab_proc[i].index++;
 	temp = g_shell.lst_env;
 	while (temp)

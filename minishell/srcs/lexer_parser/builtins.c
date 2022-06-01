@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:30:57 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/01 14:57:21 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:36:41 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	read_env(char *word, int i)
 }
 
 
-void	ft_export(char *word) // faut le faire pour chaque fois //renommer ft_export plutot
+void	ft_export(char *word)
 {
 	int	i;
 

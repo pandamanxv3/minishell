@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:31:52 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/30 14:44:00 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/01 16:55:09 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ t_env	*get_env(char **env, t_gc *gc)
 	int		i;
 
 	i = 0;
+	if (*env == NULL)
+		return (NULL);
 	lst_env = get_envlst(env[i], gc);
 	i++;
 	while (env[i])

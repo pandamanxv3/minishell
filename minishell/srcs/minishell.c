@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/28 06:45:09 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:01:31 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,19 @@ void	minishell(void)
 	while (1)
 	{
 		signal(SIGINT, sighandler_int);
-		signal(SIGQUIT, sighandler_quit);
+		// signal(SIGQUIT, sighandler_quit);
 		g_shell.line = readline(MINISHELL);
+		if (g_shell.line == NULL)
+		{
+			free(g_shell.line);
+			ft_free(g_shell.gc);
+			exit(1); //?
+		}
 		g_shell.gc2 = ft_gcnew(NULL, NULL);
 		if (lexer_prompt() == 0)
 		{
 			if (parsing_prompt() == 1)
-				exit(1); //?
+				;
 			//printf("%s\n", g_shell.tab_proc[0].tab_token[0].word);
 			dispatch_exec();
 		}
@@ -51,11 +57,7 @@ int	main(int argc, char **argv, char *env[])
 {
 	(void)argc;
 	(void)argv;
-	if (env == NULL)
-	{
-		write(2, "error: no environnements\n", 25);
-		exit(EXIT_FAILURE);
-	}
+
 	g_shell.gc = ft_gcnew(NULL, NULL);
 	g_shell.lst_env = get_env(env, g_shell.gc);
 	minishell();
