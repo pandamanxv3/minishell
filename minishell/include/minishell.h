@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/28 06:11:01 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:25:30 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct	s_minishell
 	int			nb_proc; //défini par le nombre de pipes dans la ligne d'entrée
 	char		*line;
 	int			length_line;
+	int			index_hd;
 	int			tab_index_pipes[512];
 	pid_t		*pid;
 	int			error;
@@ -122,6 +123,7 @@ int 	init_tokens(void);
 void	find_nb_tokens(int j);
 void	all_token_types(void);
 void	copy_token(int i, int j, char *str);
+void	val_strlcpy(char *dst, char *src, int size);
 int		size_error(void);
 int		itoa_remixed(char *dst);
 
@@ -144,7 +146,7 @@ void	ft_pre_pwd(int i, int j);
 char	*ft_pwd(void);
 void	ft_chdir(char *path);
 void    builtin_share(int i, int j);
-void 	ft_exit(void);
+void 	ft_exit(int i);
 
 /* MAIN FUNCS*/
 

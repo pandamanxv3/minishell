@@ -3,31 +3,31 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+         #
+#    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 11:28:34 by cbarbit           #+#    #+#              #
-#    Updated: 2022/05/28 04:24:37 by aboudjel         ###   ########.fr        #
+#    Updated: 2022/05/30 14:35:42 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 C_FILES =	srcs/minishell.c \
-			srcs/lexer_all.c \
-			srcs/init_processes.c \
-			srcs/env_lst.c \
-			srcs/mallocs.c \
-			srcs/signals_handlers.c \
-			srcs/init_tokens.c \
-			srcs/copy_tokens.c \
-			srcs/manage_tokens.c \
-			srcs/define_token_type.c \
-			srcs/builtins.c \
-			srcs/builtins_bis.c \
-			srcs/builtins_in_action.c \
-			srcs/exec.c \
-			srcs/utils_exec.c \
-			srcs/get_tab_exec.c
+			srcs/lexer_parser/lexer_all.c \
+			srcs/lexer_parser/init_processes.c \
+			srcs/lexer_parser/env_lst.c \
+			srcs/lexer_parser/mallocs.c \
+			srcs/lexer_parser/signals_handlers.c \
+			srcs/lexer_parser/init_tokens.c \
+			srcs/lexer_parser/copy_tokens.c \
+			srcs/lexer_parser/manage_tokens.c \
+			srcs/lexer_parser/define_token_type.c \
+			srcs/lexer_parser/builtins.c \
+			srcs/lexer_parser/builtins_bis.c \
+			srcs/lexer_parser/builtins_in_action.c \
+			srcs/exec/exec.c \
+			srcs/exec/utils_exec.c \
+			srcs/exec/get_tab_exec.c
 CC = cc
 
 CFLAGS = -Werror -Wall -Wextra -g -g3 
