@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:30:57 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/01 14:57:21 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:18:05 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	print_env(t_env *env) //env
 		printf("%s", temp->var);
 		printf("=");
 		printf("%s\n", temp->val);
+		//printf("VAR: %s\n", temp->var);
+		//printf("VAL: %s\n", temp->val);
 		if (!temp->next)
 			break ;
 		temp = temp->next;

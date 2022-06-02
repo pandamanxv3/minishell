@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/30 14:43:44 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/02 14:20:01 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,25 @@ static void	read_and_replace_envCD(char *var, char *val)
 	t_env	*current;
 
 	current = g_shell.lst_env;
+	//printf("VAR %s\n", var);
+	//printf("VAL %s\n", val);
 	while(current)
 	{
 		if (val_strncmp(var, current->var, ft_strlen(var)) == 0)
+		{
 			current->val = val;
+			//printf("VAL: %s\n", current->val);	
+		}
+		if (!current->next)
+			break ;
 		current = current->next;
 	}
+	// current = g_shell.lst_env;
+	// while (current)
+	// {
+	// 	printf("VAL: %s\n", current->val);
+	// 	current = current->next;		
+	// }
 }
 
 void	ft_pre_pwd(int i, int j)
@@ -50,8 +63,8 @@ char	*ft_pwd(void)
 {
 	char	buffer[PATH_MAX + 1];
 	char	*str;
-	if (getcwd(buffer, PATH_MAX + 1) == NULL)
-		return (NULL);
+
+	getcwd(buffer, PATH_MAX + 1);
 	str = ft_strdup(buffer);
 	if (!str)
 		ft_error("error malloc du ft_pwd");
@@ -73,6 +86,7 @@ static char	*get_home_val(void)
 	}
 	return (path);
 }
+
 void	ft_chdir(char *path)
 {
 	char	*new_pwd;
@@ -87,11 +101,17 @@ void	ft_chdir(char *path)
 	return_chdir = chdir(path); //j'essaie de changer de directory 
 	if (return_chdir == -1)
 	{
-		printf(" cd: no such file or directory:  %s\n", path);
+		if (open(path, O_RDONLY) == -1)
+		{
+			printf("cd: no such file or directory: %s\n", path);
+			g_shell.error = 1;
+			return ;
+		}
+		printf("cd: not a directory: %s\n", path);
 		g_shell.error = 1;
 		return ; //setup echo $? a 1 ss exit(?) perror ou jsais pas quoi
 	}
-	if (g_shell.unset_pwd == 1) //pwd viet d'etre unset
+	if (g_shell.unset_pwd == 1) //pwd vient d'etre unset
 	{
 		g_shell.temp_old_dir = ft_pwd(); //a free a un moment
 		unset("OLDPWD");
@@ -107,7 +127,9 @@ void	ft_chdir(char *path)
 		return ;
 	}
 	new_pwd = ft_pwd();
+	//printf("NEW PWD %s\n", new_pwd);
 	read_and_replace_envCD("PWD", new_pwd);
 	old_pwd = tempo; //j'ai reussi a changer de directory
+	//printf("OLD PWD %s\n", old_pwd);
 	read_and_replace_envCD("OLDPWD", old_pwd);
 }
