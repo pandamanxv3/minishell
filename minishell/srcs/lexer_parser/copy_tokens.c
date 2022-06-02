@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:04:32 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/01 15:48:57 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:47:37 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,44 @@ static int copy_var(char *copy, int i, char *str)
 	}
 	return (0);
 }
+
+// static int copy_var(char *copy, int i, char *str)
+// {
+// 	int		j;
+// 	int		k;
+// 	t_env	*temp;
+	
+// 	g_shell.tab_proc[i].index++;
+// 	if (str[g_shell.tab_proc[i].index] == '\0')
+// 	{
+// 		copy[0] = '$';
+// 		return (1);		
+// 	}
+// 	j = g_shell.tab_proc[i].index;
+// 	if (str[g_shell.tab_proc[i].index++] == '?')
+// 		return (itoa_remixed(copy));
+// 	if (!str[g_shell.tab_proc[i].index + 1] && (ft_isalpha(str[g_shell.tab_proc[i].index]) == 1 && str[g_shell.tab_proc[i].index] != '_'))
+// 	{
+// 		copy[0] = '$';
+// 		return (1);
+// 	}
+// 	while (str[g_shell.tab_proc[i].index] && (ft_isalnum(str[g_shell.tab_proc[i].index]) == 1 || str[g_shell.tab_proc[i].index] == '_'))
+// 		g_shell.tab_proc[i].index++;
+// 	temp = g_shell.lst_env;
+// 	while (temp)
+// 	{
+// 		k = val_strncmp((str + j), temp->var, (g_shell.tab_proc[i].index - j));
+
+// 		if (k == 0)
+// 		{
+// 			k = ft_strlen(temp->val);
+// 			val_strlcpy(copy, temp->val, k);
+// 			return (k);
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (0);
+// }
 
 
 static void copy_on_simple_quote(int	i, int j, char *str)
