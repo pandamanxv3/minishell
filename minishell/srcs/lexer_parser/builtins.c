@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:30:57 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 14:18:05 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/02 15:33:06 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,34 @@ void	unset(char *str)
 	}
 }
 
-void	replace_env(char *word, int i)
+void	replace_env(char *word, char *word2, int i)
 {
 	t_env	*current;
 
 	current = g_shell.lst_env;
-	while(current)
+	if (i == -5000)
 	{
-		if (val_strncmp(word, current->var, i) == 0)
+		while(current)
 		{
-			current->val = env_dup(word + i + 1, ft_strlen(word + i), g_shell.gc);
-			break;
+			if (val_strncmp(word, current->var, ft_strlen(word)) == 0)
+			{
+				current->val = env_dup(word2, ft_strlen(word2) + 1, g_shell.gc);
+				break;
+			}
+			current = current->next;
 		}
-		current = current->next;
+	}
+	else
+	{
+		while(current)
+		{
+			if (val_strncmp(word, current->var, i) == 0)
+			{
+				current->val = env_dup(word + i + 1, ft_strlen(word + i), g_shell.gc);
+				break;
+			}
+			current = current->next;
+		}
 	}
 }
 
@@ -132,7 +147,7 @@ void	ft_export(char *word) // faut le faire pour chaque fois //renommer ft_expor
 	if (word[i] == '=')
 	{
 		if (read_env(word, i) == 0)
-			replace_env(word, i);
+			replace_env(word, NULL, i);
 		else
 			add_env(g_shell.lst_env, get_envlst(word, g_shell.gc));
 	}

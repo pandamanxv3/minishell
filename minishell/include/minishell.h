@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/01 14:25:30 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:29:53 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ char	*env_dup(char *src, int size, t_gc *gc);
 t_env	*get_envlst(char *var, t_gc *gc);
 t_env	*get_env(char **env, t_gc *gc);
 int		read_env(char *word, int i);
-void	replace_env(char *word, int i);
+void	replace_env(char *word, char *word2, int i);
 
 /* BUILTINS */
 
