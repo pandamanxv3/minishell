@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 06:21:59 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:33:38 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ char	*getpath(char *cmd);
 char	**get_envtab(void);
 char	**get_commandtab(int i);
 void    ft_error(char *msg);
+void	print_error(char *msg1, char *msg2, char *msg3);
 void	ft_wait(void);
 char	*ft_strjoin_and_replace(char *s1, char *s2, int i);
 

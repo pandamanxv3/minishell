@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 06:27:16 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 14:32:05 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ static void	ft_execve(int i, int j)
 				, get_commandtab(i), get_envtab()) == -1)
 		{
 			if (g_shell.tab_proc[i].tab_token[j].word[0])
+			{
+				puts("LOL");
+				g_shell.error = 127;	
 				write(2, "command not found: ", 19);
+			}
 			else
 				write(2, "permission denied:", 18);
 			write(2, g_shell.tab_proc[i].tab_token[j].word,
@@ -40,7 +44,7 @@ void	child(int i)
 	int	j;
 
 	j = 0;
-	puts("coucou from child");
+	//puts("coucou from child");
 	exec_fd(i, 0, 0);
 	if (i < g_shell.nb_proc - 1)
 		close(g_shell.tab_proc[i + 1].in_fd);

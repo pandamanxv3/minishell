@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:31:05 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 19:35:27 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 14:17:39 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,17 @@ static int	check_unset(int i, char *str)
 
 	check = 0;
 	if (i == 0 && (ft_isdigit(str[i]) == 1))
-		check = 1;
-	if ((ft_isalnum(str[i]) == 0 && str[i] != '_'))
-		check = 1;
-	if (check == 1)
 	{
+		check = 1;
+		g_shell.error = 1;
+		ft_putstr_fd("unset: `", 2);
+		write(2, str, ft_strlen(str));
+		ft_putendl_fd("': not a valid identifier", 2);
+	}	
+	if ((ft_isalnum(str[i]) == 0 && str[i] != '_'))
+	{
+		check = 1;
+		g_shell.error = 127;
 		ft_putstr_fd("unset: `", 2);
 		write(2, str, ft_strlen(str));
 		ft_putendl_fd("': not a valid identifier", 2);

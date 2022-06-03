@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:41:49 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 20:07:11 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:38:48 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	print_error(char *msg1, char *msg2, char *msg3)
 	if (msg2)
 		write(2, msg2, ft_strlen(msg2));
 	if (msg3)
+	{
 		write(2, msg3, ft_strlen(msg3));
+		write(2, "\n", 1);
+	}
 }
 
 void	ft_exit(int i)

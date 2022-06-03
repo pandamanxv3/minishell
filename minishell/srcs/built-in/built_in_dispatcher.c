@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 11:17:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 13:48:55 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ extern t_minishell	g_shell;
 
 static void	builtin_share3(int i, int j, int count)
 {
-	int	first_word;
+	int		first_word;
 
+	g_shell.error = 0;
 	if (val_strncmp("cd", g_shell.tab_proc[i].tab_token[j].word, 2) == 0)
 	{
 		while (j < g_shell.tab_proc[i].nb_tokens)
@@ -29,6 +30,7 @@ static void	builtin_share3(int i, int j, int count)
 			}
 			if (g_shell.tab_proc[i].tab_token[j].type == WORD_N)
 			{
+				g_shell.error = 2;
 				ft_putendl_fd("cd: -n: invalid option", 2);
 				return ;
 			}
@@ -39,7 +41,11 @@ static void	builtin_share3(int i, int j, int count)
 		if (count == 1)
 			ft_chdir(g_shell.tab_proc[i].tab_token[first_word].word);
 		if (count > 1)
-			ft_putendl_fd("cd: too many arguments", 2); 
+		{
+			g_shell.error = 1;
+			ft_putendl_fd("cd: too many arguments", 2);
+			//ft_putendl_fd("cd: too many arguments", 2); 			
+		}
 	}
 }
 

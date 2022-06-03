@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:38:31 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 19:40:49 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 14:32:55 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_echo(int i, int n)
 
 	j = 0;
 	type = g_shell.tab_proc[i].tab_token[j].type;
+	g_shell.error = 0;
 	while (type != WORD && j < g_shell.tab_proc[i].nb_tokens)
 	{
 		if (type == WORD_N)

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 06:21:50 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 15:03:19 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	minishell(void)
 	while (1)
 	{
 		signal(SIGINT, sighandler_int);
-		// signal(SIGQUIT, sighandler_quit);
+		//signal(SIGQUIT, sighandler_quit);
 		g_shell.line = readline(MINISHELL);
 		if (g_shell.line == NULL)
 		{
