@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 19:20:18 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:12:37 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/202
 	new_pwd = ft_pwd();
 	read_and_replace_envCD("PWD", ft_pwd());
 	read_and_replace_envCD("OLDPWD", tempo);
-	printf("NEW PWD %s %d return_chrid %d \n", new_pwd, ft_strlen(new_pwd), return_chdir);
-	printf("OLD PWD %s %d\n", tempo, ft_strlen(tempo));
+	//printf("NEW PWD %s %d return_chrid %d \n", new_pwd, ft_strlen(new_pwd), return_chdir);
+	//printf("OLD PWD %s %d\n", tempo, ft_strlen(tempo));
 }
