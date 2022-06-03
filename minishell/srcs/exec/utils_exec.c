@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:55:17 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/03 03:28:51 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 06:25:15 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ void	ft_error(char *msg)
 	ft_free(g_shell.gc);
 	ft_free(g_shell.gc2);
 	exit(1);
+}
+
+void	ft_wait(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < g_shell.nb_proc)
+		waitpid(g_shell.pid[i++], NULL, 0);
 }
 
 char	*ft_strjoin_and_replace(char *s1, char *s2, int i)

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 20:32:54 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 05:03:50 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	builtin_share2(int i, int j, char *builtin)
 			j++;
 		}	
 	}
-	if (val_strncmp("export", builtin, 6) == 0)
+	else if (val_strncmp("export", builtin, 6) == 0)
 	{
 		while (j < g_shell.tab_proc[i].nb_tokens)
 		{
@@ -63,7 +63,8 @@ static void	builtin_share2(int i, int j, char *builtin)
 			j++;
 		}		
 	}
-	builtin_share3(i, j, 0);
+	else
+		builtin_share3(i, j, 0);
 }
 
 void	builtin_share(int i, int j)
@@ -73,11 +74,12 @@ void	builtin_share(int i, int j)
 	builtin = g_shell.tab_proc[i].tab_token[j].word;
 	if (val_strncmp("pwd", builtin, 3) == 0)
 		ft_pre_pwd(i, j);
-	if (val_strncmp("echo", builtin, 4) == 0)
+	else if (val_strncmp("echo", builtin, 4) == 0)
 		ft_echo(i, 1);
-	if (val_strncmp("env", builtin, 3) == 0)
+	else if (val_strncmp("env", builtin, 3) == 0)
 		print_env(g_shell.lst_env);
-	if (val_strncmp("exit", builtin, 4) == 0)
+	else if (val_strncmp("exit", builtin, 4) == 0)
 		ft_exit(i);
-	builtin_share2(i, j, builtin);
+	else
+	 builtin_share2(i, j, builtin);
 }

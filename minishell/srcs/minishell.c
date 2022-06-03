@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/01 17:01:31 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/03 06:21:50 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	minishell(void)
 			if (parsing_prompt() == 1)
 				;
 			//printf("%s\n", g_shell.tab_proc[0].tab_token[0].word);
-			dispatch_exec();
+			dispatch_exec(0,0);
 		}
 		add_history(g_shell.line);
 		free(g_shell.line);

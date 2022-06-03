@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:46:04 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/31 11:36:57 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 05:06:05 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,17 +122,17 @@ static void	builtin_or_command(int i, int j)
 }
 
 /* TEST POUR VERIF LES TYPES */
-// static void	print_type(int i)
-// {
-// 	int	j;
+static void	print_type(int i)
+{
+	int	j;
 
-// 	j = 0;
-// 	while (j < g_shell.tab_proc[i].nb_tokens)
-// 	{
-// 		printf("TOKEN[%d][%d] TYPE IS: %d\n", i, j, g_shell.tab_proc[i].tab_token[j].type);
-// 		j++;		
-// 	}
-// }
+	j = 0;
+	while (j < g_shell.tab_proc[i].nb_tokens)
+	{
+		printf("TOKEN[%d][%d] %s TYPE IS: %d\n", i, j, g_shell.tab_proc[i].tab_token[j].word, g_shell.tab_proc[i].tab_token[j].type);
+		j++;		
+	}
+}
 
 void	all_token_types(void)
 {
@@ -166,7 +166,7 @@ void	all_token_types(void)
 				word_or_word_n(i, j);
 			j++;
 		}
-		//print_type(i);
+		print_type(i);
 		i++;
 	}
 }

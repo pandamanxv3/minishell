@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 03:29:23 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 06:21:59 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,10 @@ void	minishell(void);
 
 /* EXECUTION */
 
-void    dispatch_exec(void);
+void    dispatch_exec(int i, int j);
 void    child(int i);
 void	exec_fd(int i, int child_or_parents, int j);
+// void	exec_fd(int i, int child_or_parents);
 int     ft_open(char *str, int type);
 int     ft_heredoc(char *limiter);
 void	ft_close(int i);
@@ -169,6 +170,7 @@ char	*getpath(char *cmd);
 char	**get_envtab(void);
 char	**get_commandtab(int i);
 void    ft_error(char *msg);
+void	ft_wait(void);
 char	*ft_strjoin_and_replace(char *s1, char *s2, int i);
 
 #endif

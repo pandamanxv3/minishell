@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 18:57:18 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/03 03:39:20 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 05:53:24 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,8 +239,6 @@ extern t_minishell	g_shell;
 // 		j++;
 // 		if (g_shell.tab_proc[i].in_fd < 0 || g_shell.tab_proc[i].out_fd < 0)
 // 		{
-// 			if (child_or_parents == 1)
-// 				return ;
 // 			if (g_shell.tab_proc[i].in_fd > 0)
 // 				close(g_shell.tab_proc[i].in_fd);
 // 			if (g_shell.tab_proc[i].out_fd > 1)
@@ -273,9 +271,8 @@ void	child(int i)
 	ft_dup(g_shell.tab_proc[i].in_fd, STDIN_FILENO);
 	if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
 	ft_dup(g_shell.tab_proc[i].out_fd, STDOUT_FILENO);
-	while (j < g_shell.tab_proc[i].nb_tokens && (g_shell.tab_proc[i].tab_token[j].type != BUILTIN && g_shell.tab_proc[i].tab_token[j].type != COMMAND))
+	while (j + 1 < g_shell.tab_proc[i].nb_tokens && (g_shell.tab_proc[i].tab_token[j].type != BUILTIN && g_shell.tab_proc[i].tab_token[j].type != COMMAND))
 		j++;
-	// ft_close(i);
 	if (j < g_shell.tab_proc[i].nb_tokens && g_shell.tab_proc[i].tab_token[j].type == BUILTIN)
     {
 		builtin_share(i, j);
@@ -283,7 +280,8 @@ void	child(int i)
 		ft_free(g_shell.gc);
         exit (0);
     }
-	if (j < g_shell.tab_proc[i].nb_tokens && g_shell.tab_proc[i].tab_token[j].type == COMMAND)
+	if (g_shell.tab_proc[i].tab_token[j].type == COMMAND)
+	{	
 		if (execve(getpath(g_shell.tab_proc[i].tab_token[j].word), get_commandtab(i), get_envtab()) == -1) 
 		{
 			if (g_shell.tab_proc[i].tab_token[j].word[0])
@@ -296,9 +294,51 @@ void	child(int i)
 			ft_free(g_shell.gc);
 			exit (1);
 		}
+	}
 }
 
-void	dispatch_exec(void)
+
+static int	cmd_or_built(int i)
+{
+	int j;
+
+	j = 0;
+	while (j + 1 < g_shell.tab_proc[i].nb_tokens && g_shell.tab_proc[i].tab_token[j].type != BUILTIN
+		&& g_shell.tab_proc[i].tab_token[j].type != COMMAND)
+		j++;
+	if (g_shell.tab_proc[i].tab_token[j].type == BUILTIN || g_shell.tab_proc[i].tab_token[j].type == COMMAND)
+		return (1);
+	ft_free(g_shell.gc2);
+	ft_free(g_shell.gc);
+	exit (0);
+}
+static void dup_builtin(int i, int j)
+{
+	int save_in;
+	int	save_out;
+	
+	exec_fd(i, 1, 0);
+	if (g_shell.tab_proc[i].in_fd >= 0)
+	{
+		if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
+		{
+			save_in = dup(STDIN_FILENO);
+			dup2(g_shell.tab_proc[i].in_fd, STDIN_FILENO);
+		}
+		if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
+		{
+			save_out = dup(STDOUT_FILENO);
+			dup2(g_shell.tab_proc[i].out_fd, STDOUT_FILENO);
+		}
+		if (g_shell.tab_proc[i].tab_token[j].type == BUILTIN)
+			builtin_share(i, j);
+		if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
+			dup2(save_in, STDIN_FILENO);
+		if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
+			dup2(save_out, STDOUT_FILENO);
+	}
+}
+void	dispatch_exec(int i, int j)
 {
 	// print_env(g_shell.lst_env);
 	int	i;
@@ -314,12 +354,8 @@ void	dispatch_exec(void)
 			ft_create_pipe(i);
 		if (g_shell.nb_proc == 1)
 		{
-			while (j < g_shell.tab_proc[i].nb_tokens - 1 && g_shell.tab_proc[i].tab_token[j].type != BUILTIN  && g_shell.tab_proc[i].tab_token[j].type != COMMAND)
-			{
-				printf("type :%d\n", g_shell.tab_proc[i].tab_token[j].type);
+			while (j < g_shell.tab_proc[i].nb_tokens - 1 && g_shell.tab_proc[i].tab_token[j].type != BUILTIN && g_shell.tab_proc[i].tab_token[j].type != COMMAND)
 				j++;
-			}
-			printf("type :%d\n", g_shell.tab_proc[i].tab_token[j].type);
 			if (g_shell.tab_proc[i].tab_token[j].type != COMMAND) // pour que si ya r ni lun ni lautre ca rentre quand meme dans le cas ou ya juste un outfile/infile sinn ca allait dans le child
 			{
 				exec_fd(i, 1, 0);
@@ -347,15 +383,15 @@ void	dispatch_exec(void)
 		}
 		g_shell.pid[i] = fork();
 		if (g_shell.pid[i] < 0)
-			return; //gestion error
+			ft_error("fork failed");
 		if (g_shell.pid[i] > 0)
 		ft_close(i);
-		if (g_shell.pid[i] == 0)
+		if (g_shell.pid[i] == 0 && cmd_or_built(i) == 1)
 			child(i);	
 		i++;
 	}
 	i = 0; 
 	while(i < g_shell.nb_proc)
 		waitpid(g_shell.pid[i++], NULL, 0);
-	// printf("****************************************\n");
+	printf("****************************************\n");
 } 
