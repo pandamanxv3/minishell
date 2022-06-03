@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:01:28 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:30:42 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	ft_export(char *word);
 void	ft_echo(int i, int n);
 void	unset(char *str);
 void	print_env(t_env *env);
-char	*ft_pwd(void);
+void	ft_pwd(void);
 void	ft_chdir(char *path);
 void    builtin_share(int i, int j);
 void 	ft_exit(int i);

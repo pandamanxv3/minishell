@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 16:45:19 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:30:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	builtin_share(int i, int j)
 
 	builtin = g_shell.tab_proc[i].tab_token[j].word;
 	if (val_strncmp("pwd", builtin, 3) == 0)
-		printf("%s\n", ft_pwd());
+	{
+		ft_pwd();
+		printf("%s\n", g_shell.pwd);
+	}	
 	else if (val_strncmp("echo", builtin, 4) == 0)
 		ft_echo(i, 1);
 	else if (val_strncmp("env", builtin, 3) == 0)

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:13:03 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:48:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,17 @@ extern t_minishell	g_shell;
 // 	return (str);
 // }
 
-char	*ft_pwd(void) // PWD ne marche pas dans un dossier suprimer 2/06/2022
+void	ft_pwd(void) // PWD ne marche pas dans un dossier suprimer 2/06/2022
 {
 	char	*buffer;
-	static int	i = 0;
 
-	
-	if (g_shell.pwd != NULL || (i == 0 && g_shell.pwd == NULL))
-	{
-		buffer = ft_malloc("str", PATH_MAX + 1, "error malloc buffer pwd", g_shell.gc2);
-		getcwd(buffer, PATH_MAX + 1);
-		g_shell.pwd = ft_strdup(buffer);
-		if (!g_shell.pwd)
-			ft_error("error malloc du ft_pwd");
-		ft_gcadd_back(g_shell.gc, ft_gcnew(g_shell.pwd, g_shell.gc));		
-	}
-	return (g_shell.pwd);
+	buffer = ft_malloc("str", PATH_MAX + 1, "error malloc buffer pwd", g_shell.gc2);
+	if (!getcwd(buffer, PATH_MAX + 1))
+		return ;
+	g_shell.pwd = ft_strdup(buffer);
+	if (!g_shell.pwd)
+		ft_error("error malloc du ft_pwd");
+	ft_gcadd_back(g_shell.gc, ft_gcnew(g_shell.pwd, g_shell.gc));		
 }
 
 static void	read_and_replace_envCD(char *var, char *val)
@@ -97,7 +92,6 @@ static char	*get_home_val(void)
 
 void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/2022
 {
-	char	*new_pwd;
 	char	*old_pwd;
 	char	*tempo;
 	int		return_chdir;
@@ -105,10 +99,14 @@ void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/202
 	if (path == NULL)
 		path = get_home_val();
 	if (g_shell.unset_pwd != 1 && g_shell.unset_pwd != 2)
-		tempo = ft_pwd(); //current directory
+	{
+		ft_pwd(); //current directory
+		tempo = g_shell.pwd;
+	}
 	return_chdir = chdir(path); //j'essaie de changer de directory 
 	if (return_chdir == -1)
 	{
+		if (val_strncmp(".."))
 		if (open(path, O_RDONLY) == -1)
 		{
 			printf("cd: no such file or directory: %s\n", path);
@@ -121,7 +119,8 @@ void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/202
 	}
 	if (g_shell.unset_pwd == 1) //pwd vient d'etre unset
 	{
-		g_shell.temp_old_dir = ft_pwd(); //a free a un moment
+		ft_pwd();
+		g_shell.temp_old_dir = g_shell.pwd; //a free a un moment
 		unset("OLDPWD");
 		g_shell.unset_pwd = 2;
 		return ;
@@ -134,8 +133,8 @@ void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/202
 		g_shell.unset_pwd = 0;
 		return ;
 	}
-	new_pwd = ft_pwd();
-	read_and_replace_envCD("PWD", ft_pwd());
+	ft_pwd();
+	read_and_replace_envCD("PWD", g_shell.pwd);
 	read_and_replace_envCD("OLDPWD", tempo);
 	//printf("NEW PWD %s %d return_chrid %d \n", new_pwd, ft_strlen(new_pwd), return_chdir);
 	//printf("OLD PWD %s %d\n", tempo, ft_strlen(tempo));

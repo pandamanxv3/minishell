@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:09:34 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:36:50 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	parsing_prompt(void)
 
 void	minishell(void)
 {
+	int	i;
+
+	i = 0;
 	while (1)
 	{
 		signal(SIGINT, sighandler_int);
@@ -40,7 +43,11 @@ void	minishell(void)
 			exit(1); //?
 		}
 		g_shell.gc2 = ft_gcnew(NULL, NULL);
-		g_shell.pwd = ft_pwd();
+		if (i == 0)
+		{
+			i = 1;
+			ft_pwd();
+		}
 		if (lexer_prompt() == 0)
 		{
 			if (parsing_prompt() == 1)
