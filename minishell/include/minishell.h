@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 15:29:53 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 03:29:23 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,12 @@ char	*env_dup(char *src, int size, t_gc *gc);
 t_env	*get_envlst(char *var, t_gc *gc);
 t_env	*get_env(char **env, t_gc *gc);
 int		read_env(char *word, int i);
-void	replace_env(char *word, char *word2, int i);
+void	replace_env(char *word, int i);
 
 /* BUILTINS */
 
 void	ft_export(char *word);
-void	ft_echo(int i);
+void	ft_echo(int i, int n);
 void	unset(char *str);
 void	print_env(t_env *env);
 void	ft_pre_pwd(int i, int j);
@@ -156,9 +156,10 @@ void	minishell(void);
 
 void    dispatch_exec(void);
 void    child(int i);
-void    exec_fd(int i, int child_or_parents);
+void	exec_fd(int i, int child_or_parents, int j);
 int     ft_open(char *str, int type);
 int     ft_heredoc(char *limiter);
+void	ft_close(int i);
 
 /* UTILS EXECUTION */
 
@@ -168,6 +169,6 @@ char	*getpath(char *cmd);
 char	**get_envtab(void);
 char	**get_commandtab(int i);
 void    ft_error(char *msg);
-char    *ft_strjoin_and_replace(char *s1, char *s2);
+char	*ft_strjoin_and_replace(char *s1, char *s2, int i);
 
 #endif

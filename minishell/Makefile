@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/06 11:28:34 by cbarbit           #+#    #+#              #
-#    Updated: 2022/05/30 14:35:42 by cbarbit          ###   ########.fr        #
+#    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
+#    Updated: 2022/06/03 03:46:53 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,17 @@ C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/copy_tokens.c \
 			srcs/lexer_parser/manage_tokens.c \
 			srcs/lexer_parser/define_token_type.c \
-			srcs/lexer_parser/builtins.c \
 			srcs/lexer_parser/builtins_bis.c \
-			srcs/lexer_parser/builtins_in_action.c \
 			srcs/exec/exec.c \
 			srcs/exec/utils_exec.c \
+			srcs/exec/here_doc.c \
+			srcs/exec/gestion_fd.c \
+			srcs/built-in/built_in_dispatcher.c \
+			srcs/built-in/export.c \
+			srcs/built-in/exit.c \
+			srcs/built-in/env.c \
+			srcs/built-in/echo.c \
+			srcs/built-in/unset.c \
 			srcs/exec/get_tab_exec.c
 CC = cc
 

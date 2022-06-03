@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:23:05 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 10:58:47 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/02 19:41:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    builtin_share(int i, int j)
 	if (val_strncmp("pwd", builtin, 3) == 0)
 		ft_pre_pwd(i, j);
 	if (val_strncmp("echo", builtin, 4) == 0)
-		ft_echo(i);
+		ft_echo(i, 1);
 	if (val_strncmp("export", builtin, 6) == 0)
 	{
 		while (j < g_shell.tab_proc[i].nb_tokens)

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/02 15:42:31 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/02 19:20:18 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_pre_pwd(int i, int j)
 	printf("%s\n", ft_pwd());
 }
 
-char	*ft_pwd(void)
+char	*ft_pwd(void) // PWD ne marche pas dans un dossier suprimer 2/06/2022
 {
 	char	*buffer;
 	char	*str;
@@ -44,8 +44,22 @@ char	*ft_pwd(void)
 	str = ft_strdup(buffer);
 	if (!str)
 		ft_error("error malloc du ft_pwd");
-	ft_gcadd_back(g_shell.gc2, ft_gcnew(str, g_shell.gc2));
+	ft_gcadd_back(g_shell.gc, ft_gcnew(str, g_shell.gc));
 	return (str);
+}
+
+
+static void	read_and_replace_envCD(char *var, char *val)
+{
+	t_env	*current;
+
+	current = g_shell.lst_env;
+	while(current)
+	{
+		if (val_strncmp(var, current->var, ft_strlen(var)) == 0)
+			current->val = val;
+		current = current->next;
+	}
 }
 
 static char	*get_home_val(void)
@@ -63,7 +77,7 @@ static char	*get_home_val(void)
 	return (path);
 }
 
-void	ft_chdir(char *path)
+void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/2022
 {
 	char	*new_pwd;
 	char	*old_pwd;
@@ -98,16 +112,13 @@ void	ft_chdir(char *path)
 	{
 		ft_export("OLDPWD=");
 		old_pwd = g_shell.temp_old_dir;
-		replace_env("OLDPWD", old_pwd, -5000);
+		read_and_replace_envCD("OLDPWD", old_pwd);
 		g_shell.unset_pwd = 0;
 		return ;
 	}
 	new_pwd = ft_pwd();
-	//printf("NEW PWD %s\n", new_pwd);
-	replace_env("PWD",new_pwd, -5000);
-	old_pwd = tempo; //j'ai reussi a changer de directory
-	//printf("OLD PWD %s\n", old_pwd);
-	replace_env("OLDPWD", old_pwd, -5000);
+	read_and_replace_envCD("PWD", ft_pwd());
+	read_and_replace_envCD("OLDPWD", tempo);
 	printf("NEW PWD %s %d return_chrid %d \n", new_pwd, ft_strlen(new_pwd), return_chdir);
-	printf("OLD PWD %s %d\n", old_pwd, ft_strlen(old_pwd));
+	printf("OLD PWD %s %d\n", tempo, ft_strlen(tempo));
 }

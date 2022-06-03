@@ -1,0 +1,13 @@
+valgrind --suppressions=readline_leaks.txt --leak-check=full --show-leak-kinds=all ./minishell
+
+cat | cat | lst
+export =
+export adnan=bg
+env
+export dds*fd=test
+env
+export adnan+=" des bg"
+env
+unset adnan
+env
+test here_doc avec et sans $USER

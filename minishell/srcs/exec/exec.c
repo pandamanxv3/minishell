@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 18:57:18 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/05/31 20:00:47 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/03 03:39:20 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,132 +14,132 @@
 
 extern t_minishell	g_shell;
 
-static int copy_var_hd(char *copy, char *str)
-{
-	int		j;
-	int		k;
-	t_env	*temp;
+// static int copy_var_hd(char *copy, char *str)
+// {
+// 	int		j;
+// 	int		k;
+// 	t_env	*temp;
 	
-	g_shell.index_hd++;
-		if (str[g_shell.index_hd] && (ft_isalpha(str[g_shell.index_hd]) == 1 
-			|| str[g_shell.index_hd] == '_' || str[g_shell.index_hd] == '?'))
-		j = g_shell.index_hd;
-	else
-	{
-		copy[0] = '$';
-		return (1);		
-	}
-	if (str[g_shell.index_hd++] == '?')
-		return (itoa_remixed(copy));
+// 	g_shell.index_hd++;
+// 		if (str[g_shell.index_hd] && (ft_isalpha(str[g_shell.index_hd]) == 1 
+// 			|| str[g_shell.index_hd] == '_' || str[g_shell.index_hd] == '?'))
+// 		j = g_shell.index_hd;
+// 	else
+// 	{
+// 		copy[0] = '$';
+// 		return (1);		
+// 	}
+// 	if (str[g_shell.index_hd++] == '?')
+// 		return (itoa_remixed(copy));
 
-	while ((ft_isalnum(str[g_shell.index_hd]) == 1 || str[g_shell.index_hd] == '_') && str[g_shell.index_hd])
-		g_shell.index_hd++;
-	printf(" ft_gestion_var index = %c %d\n", str[g_shell.index_hd], g_shell.index_hd);
-	temp = g_shell.lst_env;
-	while (temp)
-	{
-		k = val_strncmp((str + j), temp->var, (g_shell.index_hd - j));
+// 	while ((ft_isalnum(str[g_shell.index_hd]) == 1 || str[g_shell.index_hd] == '_') && str[g_shell.index_hd])
+// 		g_shell.index_hd++;
+// 	printf(" ft_gestion_var index = %c %d\n", str[g_shell.index_hd], g_shell.index_hd);
+// 	temp = g_shell.lst_env;
+// 	while (temp)
+// 	{
+// 		k = val_strncmp((str + j), temp->var, (g_shell.index_hd - j));
 
-		if (k == 0)
-		{
-			k = ft_strlen(temp->val);
-			val_strlcpy(copy, temp->val, k);
-			return (k);
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
+// 		if (k == 0)
+// 		{
+// 			k = ft_strlen(temp->val);
+// 			val_strlcpy(copy, temp->val, k);
+// 			return (k);
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (0);
+// }
 
-static int	gestion_var_size_hd(int j, int k, char *str)
-{
-	t_env	*temp;
+// static int	gestion_var_size_hd(int j, int k, char *str)
+// {
+// 	t_env	*temp;
 
-	g_shell.index_hd++;
-	j = g_shell.index_hd;
-	if (str[g_shell.index_hd] == '?')
-		return (size_error());
-	if (ft_isalpha(str[g_shell.index_hd]) == 0
-		&& str[g_shell.index_hd] != '_')
-		return (1);
-	g_shell.index_hd++;
-	while (ft_isalnum(str[g_shell.index_hd]) == 1
-		|| str[g_shell.index_hd] == '_')
-		g_shell.index_hd++;
-	temp = g_shell.lst_env;
-	while (temp)
-	{
-		k = val_strncmp((str + j), temp->var, (g_shell.index_hd - j));
-		if (k == 0)
-		{
-			k = ft_strlen(temp->val);
-			return (k);
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
+// 	g_shell.index_hd++;
+// 	j = g_shell.index_hd;
+// 	if (str[g_shell.index_hd] == '?')
+// 		return (size_error());
+// 	if (ft_isalpha(str[g_shell.index_hd]) == 0
+// 		&& str[g_shell.index_hd] != '_')
+// 		return (1);
+// 	g_shell.index_hd++;
+// 	while (ft_isalnum(str[g_shell.index_hd]) == 1
+// 		|| str[g_shell.index_hd] == '_')
+// 		g_shell.index_hd++;
+// 	temp = g_shell.lst_env;
+// 	while (temp)
+// 	{
+// 		k = val_strncmp((str + j), temp->var, (g_shell.index_hd - j));
+// 		if (k == 0)
+// 		{
+// 			k = ft_strlen(temp->val);
+// 			return (k);
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (0);
+// }
 
-static char	*heredoc_replace(char *tmp)
-{
-	char *dst;
-	int count;
+// static char	*heredoc_replace(char *tmp)
+// {
+// 	char *dst;
+// 	int count;
 
-	count = 0;
-	g_shell.index_hd = 0;
-	while(tmp[g_shell.index_hd])
-	{
-		if (tmp[g_shell.index_hd] == '$')
-			count += gestion_var_size_hd(0, 0, tmp);
-		else
-		{
-			count++;
-			g_shell.index_hd++;
-		}
-	}
-	dst = malloc(sizeof(char) * count + 1);
-	if (!dst)
-		ft_error("error : malloc problem in the heredoc");
-	dst[count] = '\0';
-	g_shell.index_hd = 0;
-	count = 0;
-	while(tmp[g_shell.index_hd])
-	{
-		if (tmp[g_shell.index_hd] == '$')
-			count += copy_var_hd(dst + count, tmp);
-		else
-			dst[count++] = tmp[g_shell.index_hd++];
-	}
-	free(tmp);
-	return (dst);
-}
+// 	count = 0;
+// 	g_shell.index_hd = 0;
+// 	while(tmp[g_shell.index_hd])
+// 	{
+// 		if (tmp[g_shell.index_hd] == '$')
+// 			count += gestion_var_size_hd(0, 0, tmp);
+// 		else
+// 		{
+// 			count++;
+// 			g_shell.index_hd++;
+// 		}
+// 	}
+// 	dst = malloc(sizeof(char) * count + 1);
+// 	if (!dst)
+// 		ft_error("error : malloc problem in the heredoc");
+// 	dst[count] = '\0';
+// 	g_shell.index_hd = 0;
+// 	count = 0;
+// 	while(tmp[g_shell.index_hd])
+// 	{
+// 		if (tmp[g_shell.index_hd] == '$')
+// 			count += copy_var_hd(dst + count, tmp);
+// 		else
+// 			dst[count++] = tmp[g_shell.index_hd++];
+// 	}
+// 	free(tmp);
+// 	return (dst);
+// }
 
-int	ft_heredoc(char *limiter)
-{
-	char	*tmp;
-	int		fd;
-	int		size;
+// int	ft_heredoc(char *limiter)
+// {
+// 	char	*tmp;
+// 	int		fd;
+// 	int		size;
 
-	size = ft_strlen(limiter);
-	fd = open("./temp/heredoc.tmp", O_TRUNC | O_APPEND
-			| O_CREAT | O_RDWR, 0000644);
-	while (1)
-	{
-		tmp = readline("> ");
-		if (!tmp || !val_strncmp(tmp, limiter, size))
-			break ;
-		if(ft_strchr(tmp, '$'))
-			tmp = heredoc_replace(tmp);
-		// printf("tmp:%s\n", tmp);
-		write(fd, tmp, ft_strlen(tmp));
-		write(fd, "\n", 1);
-		free(tmp);
-	}
-	free(tmp);
-	close(fd);
-	fd = ft_open("./temp/heredoc.tmp", O_RDONLY);
-	return (fd);
-}
+// 	size = ft_strlen(limiter);
+// 	fd = open("./temp/heredoc.tmp", O_TRUNC | O_APPEND
+// 			| O_CREAT | O_RDWR, 0000644);
+// 	while (1)
+// 	{
+// 		tmp = readline("> ");
+// 		if (!tmp || !val_strncmp(tmp, limiter, size))
+// 			break ;
+// 		if(ft_strchr(tmp, '$'))
+// 			tmp = heredoc_replace(tmp);
+// 		// printf("tmp:%s\n", tmp);
+// 		write(fd, tmp, ft_strlen(tmp));
+// 		write(fd, "\n", 1);
+// 		free(tmp);
+// 	}
+// 	free(tmp);
+// 	close(fd);
+// 	fd = ft_open("./temp/heredoc.tmp", O_RDONLY);
+// 	return (fd);
+// }
 
 // int	ft_heredoc(char *limiter)
 // {
@@ -168,95 +168,97 @@ int	ft_heredoc(char *limiter)
 // 	return (fd);
 // }
 
-int		ft_open(char *str, int type)
-{
-	int fd;
+// int		ft_open(char *str, int type)
+// {
+// 	int fd;
 
-	if (type == 0)
-		fd = open(str, O_RDONLY);
-	if (type == 1)
-		fd = open(str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
-	if (type == 2)
-		fd = open(str, O_APPEND | O_CREAT | O_RDWR, 0000644);
-	if (fd < 0 && type == 0)
-	{
-		write(2, str, ft_strlen(str));
-		write(2, ": No such file or directory", 27);
-		write(2, "\n", 1);
-		return (-1);
-	}
-	if (fd < 0 && (type == 1 || type == 2))
-	{
-		write(2, "couldn't open or create: ", 25);
-		write(2, str, ft_strlen(str));
-		write(2, "\n", 1);
-	}
-	return (fd);
-}
+// 	if (type == 0)
+// 		fd = open(str, O_RDONLY);
+// 	if (type == 1)
+// 		fd = open(str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+// 	if (type == 2)
+// 		fd = open(str, O_APPEND | O_CREAT | O_RDWR, 0000644);
+// 	if (fd < 0 && type == 0)
+// 	{
+// 		write(2, str, ft_strlen(str));
+// 		write(2, ": No such file or directory", 27);
+// 		write(2, "\n", 1);
+// 		return (-1);
+// 	}
+// 	if (fd < 0 && (type == 1 || type == 2))
+// 	{
+// 		write(2, "couldn't open or create: ", 25);
+// 		write(2, str, ft_strlen(str));
+// 		write(2, "\n", 1);
+// 	}
+// 	return (fd);
+// }
 
-void	exec_fd(int i, int child_or_parents)
-{
-	int j;
+// void	exec_fd(int i, int child_or_parents)
+// {
+// 	int j;
 
-	j = 0;
-	while (j < g_shell.tab_proc[i].nb_tokens)
-	{
-		if (g_shell.tab_proc[i].tab_token[j].type == INFILE)
-		{
-			if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
-				close(g_shell.tab_proc[i].in_fd);
-			g_shell.tab_proc[i].in_fd = ft_open(g_shell.tab_proc[i].tab_token[j].word, 0);
-			if (g_shell.tab_proc[i].in_fd < 0)
-			{
-				if (child_or_parents == 1)
-					return;
-				else
-				{
-					ft_free(g_shell.gc2);
-					ft_free(g_shell.gc);
-					exit(1);
-				}				
-			}
-		}
-		else if (g_shell.tab_proc[i].tab_token[j].type == OUTFILE)
-		{
-			if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
-				close(g_shell.tab_proc[i].out_fd);
-			g_shell.tab_proc[i].out_fd = ft_open(g_shell.tab_proc[i].tab_token[j].word,	1);
-		}
-		else if (g_shell.tab_proc[i].tab_token[j].type == HEREDOC)
-		{
-			if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
-				close(g_shell.tab_proc[i].in_fd);
-			g_shell.tab_proc[i].in_fd = ft_heredoc(g_shell.tab_proc[i].tab_token[j].word);
-		}
-		else if(g_shell.tab_proc[i].tab_token[j].type == OUTFILE_APPEND)
-		{
-			if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
-				close(g_shell.tab_proc[i].out_fd);
-			g_shell.tab_proc[i].out_fd = ft_open(g_shell.tab_proc[i].tab_token[j].word, 2);
-		}
-		j++;
-		if (g_shell.tab_proc[i].in_fd < 0 || g_shell.tab_proc[i].out_fd < 0)
-		{
-			if (g_shell.tab_proc[i].in_fd > 0)
-				close(g_shell.tab_proc[i].in_fd);
-			if (g_shell.tab_proc[i].out_fd > 1)
-				close(g_shell.tab_proc[i].out_fd);
-			ft_free(g_shell.gc2);
-			ft_free(g_shell.gc);
-			exit(EXIT_FAILURE);
-		}
-	}
-}
+// 	j = 0;
+// 	while (j < g_shell.tab_proc[i].nb_tokens)
+// 	{
+// 		if (g_shell.tab_proc[i].tab_token[j].type == INFILE)
+// 		{
+// 			if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
+// 				close(g_shell.tab_proc[i].in_fd);
+// 			g_shell.tab_proc[i].in_fd = ft_open(g_shell.tab_proc[i].tab_token[j].word, 0);
+// 			if (g_shell.tab_proc[i].in_fd < 0)
+// 			{
+// 				if (child_or_parents == 1)
+// 					return;
+// 				else
+// 				{
+// 					ft_free(g_shell.gc2);
+// 					ft_free(g_shell.gc);
+// 					exit(1);
+// 				}				
+// 			}
+// 		}
+// 		else if (g_shell.tab_proc[i].tab_token[j].type == OUTFILE)
+// 		{
+// 			if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
+// 				close(g_shell.tab_proc[i].out_fd);
+// 			g_shell.tab_proc[i].out_fd = ft_open(g_shell.tab_proc[i].tab_token[j].word,	1);
+// 		}
+// 		else if (g_shell.tab_proc[i].tab_token[j].type == HEREDOC)
+// 		{
+// 			if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
+// 				close(g_shell.tab_proc[i].in_fd);
+// 			g_shell.tab_proc[i].in_fd = ft_heredoc(g_shell.tab_proc[i].tab_token[j].word);
+// 		}
+// 		else if(g_shell.tab_proc[i].tab_token[j].type == OUTFILE_APPEND)
+// 		{
+// 			if (g_shell.tab_proc[i].out_fd != STDOUT_FILENO)
+// 				close(g_shell.tab_proc[i].out_fd);
+// 			g_shell.tab_proc[i].out_fd = ft_open(g_shell.tab_proc[i].tab_token[j].word, 2);
+// 		}
+// 		j++;
+// 		if (g_shell.tab_proc[i].in_fd < 0 || g_shell.tab_proc[i].out_fd < 0)
+// 		{
+// 			if (child_or_parents == 1)
+// 				return ;
+// 			if (g_shell.tab_proc[i].in_fd > 0)
+// 				close(g_shell.tab_proc[i].in_fd);
+// 			if (g_shell.tab_proc[i].out_fd > 1)
+// 				close(g_shell.tab_proc[i].out_fd);
+// 			ft_free(g_shell.gc2);
+// 			ft_free(g_shell.gc);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 	}
+// }
 
-void	ft_close(int i)
-{
-	if (g_shell.tab_proc[i].in_fd != 0)
-		close(g_shell.tab_proc[i].in_fd);
-	if (i != g_shell.nb_proc - 1)
-		close(g_shell.tab_proc[i].out_fd);
-}
+// void	ft_close(int i)
+// {
+// 	if (g_shell.tab_proc[i].in_fd != 0)
+// 		close(g_shell.tab_proc[i].in_fd);
+// 	if (i != g_shell.nb_proc - 1)
+// 		close(g_shell.tab_proc[i].out_fd);
+// }
 
 void	child(int i)
 {
@@ -264,7 +266,7 @@ void	child(int i)
 
 	j = 0;
 	puts("coucou from child");
-	exec_fd(i, 0);
+	exec_fd(i, 0, 0);
 	if (i < g_shell.nb_proc	- 1)
 		close(g_shell.tab_proc[i + 1].in_fd);
 	if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
@@ -320,7 +322,7 @@ void	dispatch_exec(void)
 			printf("type :%d\n", g_shell.tab_proc[i].tab_token[j].type);
 			if (g_shell.tab_proc[i].tab_token[j].type != COMMAND) // pour que si ya r ni lun ni lautre ca rentre quand meme dans le cas ou ya juste un outfile/infile sinn ca allait dans le child
 			{
-				exec_fd(i, 1);
+				exec_fd(i, 1, 0);
 				if (g_shell.tab_proc[i].in_fd >= 0)
 				{
 					if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
@@ -354,7 +356,6 @@ void	dispatch_exec(void)
 	}
 	i = 0; 
 	while(i < g_shell.nb_proc)
-		waitpid(g_shell.pid[i++], NULL, 0); //stocker avec un wait la valeur de retour de ce dernier qui va correspondre a la sortie d'exit du dernier process
-	printf("****************************************\n");
-} // si juste un builtin pas de fork, si plusieurs bultin ou builtin/commande faire les builtin dans les fork et ils vont etre useless
-// valgrind --suppressions=readline_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./minishell
+		waitpid(g_shell.pid[i++], NULL, 0);
+	// printf("****************************************\n");
+} 

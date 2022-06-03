@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:31:52 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/01 16:55:09 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:08:14 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ t_env	*get_envlst(char *var, t_gc *gc)
 	lst_env = ft_malloc("env", 0, "erreur malloc lst_env", gc);
 	while (var[i] != '=')
 		i++;
-	lst_env->var = env_dup(var, i + 1, gc);
 	lst_env->val = env_dup(var + i + 1, ft_strlen(var + i), gc);
+	if (var[i - 1] == '+')
+		i --;
+	lst_env->var = env_dup(var, i + 1, gc);
 	//printf("lst_env->val = %s\n", lst_env->val);
 	lst_env->next = NULL;
 	return (lst_env);

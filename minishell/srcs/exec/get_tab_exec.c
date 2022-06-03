@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tab_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:53:28 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/05/31 19:02:47 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/03 03:29:38 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*findpath(char *cmd, char **splitpath)
 		path = ft_strjoin(splitpath[i], "/");
 		if (!path)
 			ft_error("error malloc ft_strjoin");
-		path = ft_strjoin_and_replace(path, cmd);
+		path = ft_strjoin_and_replace(path, cmd, 0);
 		if (!path)
 			ft_error("error malloc ft_strjoin");
 		returnvalue = access(path, F_OK);
@@ -40,7 +40,7 @@ static char	*findpath(char *cmd, char **splitpath)
 		}
 	}
 	if (returnvalue == -1)
-		path = ft_strjoin_and_replace(path, cmd);
+		path = ft_strjoin_and_replace(path, cmd, 0);
 	if (!path)
 		ft_error("error malloc ft_strjoin");
 	return (path);

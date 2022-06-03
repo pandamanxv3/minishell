@@ -1,0 +1,11 @@
+minishell>type :1
+type :1
+coucou from child
+type :1
+minishell>coucou from child
+type :1
+coucou from child
+type :1
+minishell>minishell>coucou from child
+type :1
+minishell>
