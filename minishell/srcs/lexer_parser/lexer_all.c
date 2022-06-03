@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:41:48 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/30 14:42:50 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 18:49:07 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,14 @@ static int	lexer_empty_line(void)
 		return (0);
 }	
 
+void	ft_expand(void)
+{
+	int i;
+
+	i = 0;
+	
+}
+
 int	lexer_prompt(void)
 {
 	int	return_lexer;
@@ -170,6 +178,7 @@ int	lexer_prompt(void)
 		g_shell.error = 0;
 		return (1);
 	}
+	
 	return_lexer = lexer_quote_and_pipe();
 	if (return_lexer == 1 || return_lexer == 2 || return_lexer == 3)
 	{
