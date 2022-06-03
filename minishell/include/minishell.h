@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:30:42 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:46:53 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,18 @@ void	sighandler_quit(int signum);
 int 	find_nb_proc(void);
 int		lexer_prompt(void);
 int		init_processes(void);
-int 	gestion_var_size(int i, char *str);
-int		val_strncmp(char *stra, char *val, int length);
+// int 	gestion_var_size(int i, char *str);
+// int		gestion_var_size(int j, int k);
+// int		val_strncmp(char *stra, char *val, int length);
 int		parsing_prompt(void);
-
+void	size_expand(void);
 /* TOKENS */
 
 int 	init_tokens(void);
 void	find_nb_tokens(int j);
 void	all_token_types(void);
 void	copy_token(int i, int j, char *str);
-void	val_strlcpy(char *dst, char *src, int size);
+// void	val_strlcpy(char *dst, char *src, int size);
 int		size_error(void);
 int		itoa_remixed(char *dst);
 

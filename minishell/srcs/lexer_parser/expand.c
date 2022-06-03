@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:50:10 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 20:28:46 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:48:54 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,41 @@
 
 extern t_minishell	g_shell;
 
-static int	size_error(void)
+static void	val_strlcpy(char *dst, char *src, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return ;
+}
+
+static int	val_strncmp(char *stra, char *val, int length)
+{
+	int		i;
+	char	*str1;
+	char	*str2;
+
+	str1 = stra;
+	str2 = val;
+	i = 0;
+	while (length > i && (str1[i] || str2[i]))
+	{
+		if (str1[i] != str2[i])
+			return (1);
+		i++;
+	}
+	if (!str2[i])
+		return (0);
+	else
+		return (1);
+}
+
+int	size_error(void)
 {
 	int		i;
 	int		nb;
@@ -37,7 +71,7 @@ static int	size_error(void)
 	return (i);
 }
 
-static int	itoa_remixed(char *dst)
+int	itoa_remixed(char *dst)
 {
 	int		length;
 	long	nbbis;
@@ -67,6 +101,7 @@ static int copy_var(char *copy)
 {
 	int		k;
 	t_env	*temp;
+	int		j;
 	
 	g_shell.index_hd++;
 	if (g_shell.line[g_shell.index_hd] && (ft_isalpha(g_shell.line[g_shell.index_hd]) == 1 
@@ -97,7 +132,7 @@ static int copy_var(char *copy)
 	return (0);
 }
 
-static int	gestion_var_size(int j, int k)
+int	gestion_var_size(int j, int k)
 {
 	t_env	*temp;
 
@@ -128,7 +163,7 @@ static int	gestion_var_size(int j, int k)
 	return (0);
 }
 
-char	*size_expand(void)
+void	size_expand(void)
 {
 	int     count;
 	char    *str;
@@ -154,14 +189,9 @@ char	*size_expand(void)
 		if (g_shell.line[i] == '$')
 			i += copy_var(str + i);
 		else
-			g_shell.line[i] = str[g_shell.index_hd++];		
-	
-
-
-
-
-
-
-
-	
+			str[i++] = g_shell.line[g_shell.index_hd++];
+	}
+	printf("line %s\n", str);
+	// free(g_shell.line);
+	g_shell.line = str; 
 }
