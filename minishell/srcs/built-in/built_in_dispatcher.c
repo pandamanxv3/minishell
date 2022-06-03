@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 05:03:50 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:17:08 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	builtin_share3(int i, int j, int count)
 		if (count == 1)
 			ft_chdir(g_shell.tab_proc[i].tab_token[first_word].word);
 		if (count > 1)
-			ft_putendl_fd("cd: too many arguments", 2);
+			ft_putendl_fd("cd: too many arguments", 2); 
 	}
 }
 
