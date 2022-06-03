@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 11:12:37 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 16:44:41 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,25 @@
 
 extern t_minishell	g_shell;
 
-void	ft_pre_pwd(int i, int j)
-{
-	int index;
+// void	ft_pre_pwd(int i, int j)
+// {
+// 	int index;
 	
-	index = j;
-	while (index < g_shell.tab_proc[i].nb_tokens)
-	{
-		if ( g_shell.tab_proc[i].tab_token[index].type == WORD 
-		|| g_shell.tab_proc[i].tab_token[index].type == WORD_N)
-		{
-			if (i == g_shell.nb_proc - 1)
-				g_shell.error = 1;
-			ft_putstr_fd("pwd: too many arguments\n", 2);
-		}
-		index++;
-	}
-	printf("%s\n", ft_pwd());
-}
+// 	index = j;
+// 	while (index < g_shell.tab_proc[i].nb_tokens)
+// 	{
+// 		if ( g_shell.tab_proc[i].tab_token[index].type == WORD 
+// 		|| g_shell.tab_proc[i].tab_token[index].type == WORD_N)
+// 		{
+// 			if (i == g_shell.nb_proc - 1)
+// 				g_shell.error = 1;
+// 			ft_putstr_fd("pwd: too many arguments\n", 2);
+// 			return ;
+// 		}
+// 		index++;
+// 	}
+// 	printf("%s\n", ft_pwd());
+// }
 
 char	*ft_pwd(void) // PWD ne marche pas dans un dossier suprimer 2/06/2022
 {

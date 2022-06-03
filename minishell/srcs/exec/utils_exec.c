@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:55:17 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/03 06:25:15 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 16:30:08 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,17 @@ void	ft_error(char *msg)
 void	ft_wait(void)
 {
 	int	i;
+	int val;
 
+	val = 0;
 	i = 0;
 	while (i < g_shell.nb_proc)
-		waitpid(g_shell.pid[i++], NULL, 0);
+	{
+		if (wait(&val) == g_shell.pid[g_shell.nb_proc - 1])
+			g_shell.error = WEXITSTATUS(val);
+		printf("val: %d\n", g_shell.error);
+		i++;
+	}
 }
 
 char	*ft_strjoin_and_replace(char *s1, char *s2, int i)

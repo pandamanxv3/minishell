@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 14:32:05 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 16:20:22 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,21 @@ static void	ft_execve(int i, int j)
 		{
 			if (g_shell.tab_proc[i].tab_token[j].word[0])
 			{
-				puts("LOL");
 				g_shell.error = 127;	
-				write(2, "command not found: ", 19);
+		// 		write(2, "command not found: ", 19);
 			}
 			else
-				write(2, "permission denied:", 18);
-			write(2, g_shell.tab_proc[i].tab_token[j].word,
-				ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
-			write(2, "\n", 1);
+			{
+		 		g_shell.error = 1;
+		// 		write(2, "permission denied:", 18);
+			}
+		// 	write(2, g_shell.tab_proc[i].tab_token[j].word,
+		// 		ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
+		// 	write(2, "\n", 1);
+			perror(g_shell.tab_proc[i].tab_token[j].word);
 			ft_free(g_shell.gc2);
 			ft_free(g_shell.gc);
-			exit (1);
+			exit (g_shell.error);
 		}
 	}
 }

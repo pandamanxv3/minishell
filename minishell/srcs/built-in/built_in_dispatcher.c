@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 13:48:55 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 16:45:19 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,36 @@ extern t_minishell	g_shell;
 static void	builtin_share3(int i, int j, int count)
 {
 	int		first_word;
-
+	
+	first_word = -1;
 	g_shell.error = 0;
 	if (val_strncmp("cd", g_shell.tab_proc[i].tab_token[j].word, 2) == 0)
 	{
 		while (j < g_shell.tab_proc[i].nb_tokens)
 		{
-			if (g_shell.tab_proc[i].tab_token[j].type == WORD)
+			if (g_shell.tab_proc[i].tab_token[j].type == WORD
+				|| g_shell.tab_proc[i].tab_token[j].type == WORD_N)
 			{
-				first_word = j;
+				if (first_word == -1)
+					first_word = j;
 				count++;
-			}
-			if (g_shell.tab_proc[i].tab_token[j].type == WORD_N)
-			{
-				g_shell.error = 2;
-				ft_putendl_fd("cd: -n: invalid option", 2);
-				return ;
 			}
 			j++;
 		}
 		if (count == 0)
 			ft_chdir(NULL);
+		if (first_word != -1 && g_shell.tab_proc[i].tab_token[first_word].word[0] == '-')
+		{
+			g_shell.error = 2;
+			ft_putendl_fd("cd: invalid option", 2);
+			return ;
+		}
 		if (count == 1)
 			ft_chdir(g_shell.tab_proc[i].tab_token[first_word].word);
 		if (count > 1)
 		{
 			g_shell.error = 1;
-			ft_putendl_fd("cd: too many arguments", 2);
-			//ft_putendl_fd("cd: too many arguments", 2); 			
+			ft_putendl_fd("cd: too many arguments", 2); 			
 		}
 	}
 }
@@ -79,7 +81,7 @@ void	builtin_share(int i, int j)
 
 	builtin = g_shell.tab_proc[i].tab_token[j].word;
 	if (val_strncmp("pwd", builtin, 3) == 0)
-		ft_pre_pwd(i, j);
+		printf("%s\n", ft_pwd());
 	else if (val_strncmp("echo", builtin, 4) == 0)
 		ft_echo(i, 1);
 	else if (val_strncmp("env", builtin, 3) == 0)
