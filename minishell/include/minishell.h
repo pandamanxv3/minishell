@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 16:45:27 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:01:28 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct	s_minishell
 	int			error;
 	int			unset_pwd;
 	char		*temp_old_dir;
+	char		*pwd;
 	t_gc		*gc; //gc global
 	t_gc		*gc2; //gc propre a chaque line de minishell
 	t_env		*lst_env; // liste chainee dans laquelle est stockee l'env

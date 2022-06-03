@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 15:03:19 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:09:34 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	minishell(void)
 			exit(1); //?
 		}
 		g_shell.gc2 = ft_gcnew(NULL, NULL);
+		g_shell.pwd = ft_pwd();
 		if (lexer_prompt() == 0)
 		{
 			if (parsing_prompt() == 1)

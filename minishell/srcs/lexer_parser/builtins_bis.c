@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 16:44:41 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:13:03 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,37 @@ extern t_minishell	g_shell;
 // 	printf("%s\n", ft_pwd());
 // }
 
+// char	*ft_pwd(void) // PWD ne marche pas dans un dossier suprimer 2/06/2022
+// {
+// 	char	*buffer;
+// 	char	*str;
+
+// 	buffer = ft_malloc("str", PATH_MAX + 1, "error malloc buffer pwd", g_shell.gc2);
+// 	getcwd(buffer, PATH_MAX + 1);
+// 	str = ft_strdup(buffer);
+// 	if (!str)
+// 		ft_error("error malloc du ft_pwd");
+// 	ft_gcadd_back(g_shell.gc, ft_gcnew(str, g_shell.gc));
+// 	return (str);
+// }
+
 char	*ft_pwd(void) // PWD ne marche pas dans un dossier suprimer 2/06/2022
 {
 	char	*buffer;
-	char	*str;
+	static int	i = 0;
 
-	buffer = ft_malloc("str", PATH_MAX + 1, "error malloc buffer pwd", g_shell.gc2);
-	getcwd(buffer, PATH_MAX + 1);
-	str = ft_strdup(buffer);
-	if (!str)
-		ft_error("error malloc du ft_pwd");
-	ft_gcadd_back(g_shell.gc, ft_gcnew(str, g_shell.gc));
-	return (str);
+	
+	if (g_shell.pwd != NULL || (i == 0 && g_shell.pwd == NULL))
+	{
+		buffer = ft_malloc("str", PATH_MAX + 1, "error malloc buffer pwd", g_shell.gc2);
+		getcwd(buffer, PATH_MAX + 1);
+		g_shell.pwd = ft_strdup(buffer);
+		if (!g_shell.pwd)
+			ft_error("error malloc du ft_pwd");
+		ft_gcadd_back(g_shell.gc, ft_gcnew(g_shell.pwd, g_shell.gc));		
+	}
+	return (g_shell.pwd);
 }
-
 
 static void	read_and_replace_envCD(char *var, char *val)
 {
