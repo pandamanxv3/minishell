@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 20:07:11 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:30:29 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	replace_env(char *word, int i);
 /* BUILTINS */
 
 void	ft_export(char *word);
-void	ft_echo(int i, int n);
+void	ft_echo(int i, int n, int j);
 void	unset(char *str);
 void	print_env(t_env *env);
 void	ft_pwd(void);
