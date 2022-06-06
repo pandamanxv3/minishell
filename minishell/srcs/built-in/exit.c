@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:41:49 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 11:38:48 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:06:08 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	ft_exit(int i)
 			print_error("exit: ", g_shell.tab_proc[i].tab_token[1].word,
 				": numeric argument required\n");
 	}
-	free(g_shell.line);
 	ft_free(g_shell.gc);
 	ft_free(g_shell.gc2);
 	exit (new_exit);

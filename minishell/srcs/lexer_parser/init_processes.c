@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_processes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 11:28:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/30 14:44:03 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:54:18 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	init_processes(void)
 		find_nb_tokens(i);
 		g_shell.tab_proc[i].tab_token = malloc(sizeof(t_token) * (g_shell.tab_proc[i].nb_tokens + 1));
 		if (!g_shell.tab_proc[i].tab_token)
-			mallocreturn_failed(g_shell.gc2, "t_token malloc failed");
+			mallocreturn_failed(g_shell.gc, g_shell.gc2, "t_token malloc failed");
 		else
 			ft_gcadd_back(g_shell.gc2, ft_gcnew(g_shell.tab_proc[i].tab_token, g_shell.gc2));
 		//printf("NB TOKEN : %d\n", g_shell.tab_proc[i].nb_tokens);

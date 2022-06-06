@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:41:48 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/30 14:42:50 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:34:40 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ static int	lexer_quote_and_pipe(void)
 	return (0);
 }
 
-static int	lexer_empty_line(void)
+int	lexer_empty_line(void)
 {
 	int	i;
 
@@ -158,18 +158,11 @@ int	lexer_prompt(void)
 	int	return_lexer;
 
 	g_shell.nb_proc = 1;
-	if (g_shell.line == NULL)
-	{
-		printf("exit");
-		free(g_shell.line);
-		ft_free(g_shell.gc);
-		exit(2);
-	}
 	if (lexer_empty_line() == 1)
 	{
 		g_shell.error = 0;
 		return (1);
-	}
+	}	
 	return_lexer = lexer_quote_and_pipe();
 	if (return_lexer == 1 || return_lexer == 2 || return_lexer == 3)
 	{
@@ -177,11 +170,8 @@ int	lexer_prompt(void)
 			printf("syntax error on quotation marks\n");
 		if (return_lexer == 2)
 			printf("syntax error near unexpected token `|'\n");
-			//printf("error with the pipes syntax\n");
 		if (return_lexer == 3)
 			printf("syntax error near unexpected token `newline'\n");
-			//printf("error with the redirections syntax\n");
-		//exit(1); //pas le bon exit du coup?
 		return (1);
 	}
 	return (0);

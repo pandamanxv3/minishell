@@ -6,15 +6,16 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:46:19 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/05/06 19:02:46 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/06 17:47:34 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	mallocreturn_failed(t_gc *gc, char *msg)
+void	mallocreturn_failed(t_gc *gc, t_gc *gc2, char *msg)
 {
 	ft_free(gc);
+	ft_free(gc2);
 	ft_putendl_fd(msg, 2);
 	exit(EXIT_FAILURE);
 }

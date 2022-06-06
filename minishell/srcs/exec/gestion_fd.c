@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 22:09:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 04:04:19 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:13:49 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	ft_open(char *str, int type)
 	if (type == 0)
 		fd = open(str, O_RDONLY);
 	if (type == 1)
-		fd = open(str, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+		fd = open(str, O_TRUNC | O_CREAT | O_WRONLY, 0000644);
 	if (type == 2)
-		fd = open(str, O_APPEND | O_CREAT | O_RDWR, 0000644);
+		fd = open(str, O_APPEND | O_CREAT | O_WRONLY, 0000644);
 	if (fd < 0 && type == 0)
 	{
 		write(2, str, ft_strlen(str));

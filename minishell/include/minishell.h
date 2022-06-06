@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:30:42 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:07:11 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@
 typedef struct s_token
 {
 	char	*word;
-	int		type; //faire un enum pour le type de chaque mot
+	int		type;
 	int		word_malloc_count;
 }	t_token;
 
 /* PROCESS DATA STRUCTURE */
 
-typedef struct	s_process
+typedef struct s_process
 {
 	char	*str;
 	int		strlen;
 	int		start;
 	int		end;
 	int		index;
-	char	*path; //path de la commande?
+	char	*path;
 	int		in_fd;
 	int		out_fd;
 	int		nb_tokens;
@@ -64,25 +64,24 @@ typedef struct	s_process
 
 /* TOKEN TYPES */
 
-typedef enum	e_toke_types
+typedef enum e_toke_types
 {
-	BUILTIN, //0
-	COMMAND, //1
-	WORD, //2
-	INFILE, //3
-	HEREDOC, //4
-	OUTFILE, //5
-	OUTFILE_APPEND, //6
-	SEPARATOR, //7
-	WORD_N, //8
+	BUILTIN,
+	COMMAND,
+	WORD,
+	INFILE,
+	HEREDOC,
+	OUTFILE,
+	OUTFILE_APPEND,
+	SEPARATOR,
+	WORD_N,
 }	t_token_types;
 
 /* MAIN STRUCTURE */
 
-typedef struct	s_minishell
+typedef struct s_minishell
 {
-	//int			exit;
-	int			nb_proc; //défini par le nombre de pipes dans la ligne d'entrée
+	int			nb_proc;
 	char		*line;
 	int			length_line;
 	int			index_hd;
@@ -92,10 +91,10 @@ typedef struct	s_minishell
 	int			unset_pwd;
 	char		*temp_old_dir;
 	char		*pwd;
-	t_gc		*gc; //gc global
-	t_gc		*gc2; //gc propre a chaque line de minishell
-	t_env		*lst_env; // liste chainee dans laquelle est stockee l'env
-	t_process	*tab_proc; //de taille de nb_process
+	t_gc		*gc;
+	t_gc		*gc2;
+	t_env		*lst_env;
+	t_process	*tab_proc;
 }	t_minishell;
 
 /* MALLOCS */
@@ -107,24 +106,24 @@ void	size_malloc_tokens(int i, int j, char *str);
 /* SIGNALS */
 
 void	sighandler_int(int signum);
-void	sighandler_quit(int signum);
 
 /* LEXER & PARSER */
 
-int 	find_nb_proc(void);
+int		find_nb_proc(void);
 int		lexer_prompt(void);
 int		init_processes(void);
-int 	gestion_var_size(int i, char *str);
+int		lexer_empty_line(void);
 int		val_strncmp(char *stra, char *val, int length);
+void	val_strlcpy(char *dst, char *src, int size);
 int		parsing_prompt(void);
+void	size_expand(int i, int count);
 
 /* TOKENS */
 
-int 	init_tokens(void);
+int		init_tokens(void);
 void	find_nb_tokens(int j);
 void	all_token_types(void);
 void	copy_token(int i, int j, char *str);
-void	val_strlcpy(char *dst, char *src, int size);
 int		size_error(void);
 int		itoa_remixed(char *dst);
 
@@ -145,31 +144,30 @@ void	unset(char *str);
 void	print_env(t_env *env);
 void	ft_pwd(void);
 void	ft_chdir(char *path);
-void    builtin_share(int i, int j);
-void 	ft_exit(int i);
+void	builtin_share(int i, int j);
+void	ft_exit(int i);
 
 /* MAIN FUNCS*/
 
-void	minishell(void);
+void	minishell(int i);
 
 /* EXECUTION */
 
-void    dispatch_exec(int i, int j);
-void    child(int i);
+void	dispatch_exec(int i, int j);
+void	child(int i);
 void	exec_fd(int i, int child_or_parents, int j);
-// void	exec_fd(int i, int child_or_parents);
-int     ft_open(char *str, int type);
-int     ft_heredoc(char *limiter);
+int		ft_open(char *str, int type);
+int		ft_heredoc(char *limiter);
 void	ft_close(int i);
 
 /* UTILS EXECUTION */
 
-void    ft_dup(int oldfd, int newfd);
-void    ft_create_pipe(int i);
+void	ft_dup(int oldfd, int newfd);
+void	ft_create_pipe(int i);
 char	*getpath(char *cmd);
 char	**get_envtab(void);
 char	**get_commandtab(int i);
-void    ft_error(char *msg);
+void	ft_error(char *msg);
 void	print_error(char *msg1, char *msg2, char *msg3);
 void	ft_wait(void);
 char	*ft_strjoin_and_replace(char *s1, char *s2, int i);
