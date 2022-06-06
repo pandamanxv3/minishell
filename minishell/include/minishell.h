@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 20:46:53 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:46:07 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,25 +107,26 @@ void	size_malloc_tokens(int i, int j, char *str);
 /* SIGNALS */
 
 void	sighandler_int(int signum);
-void	sighandler_quit(int signum);
+// void	sighandler_quit(int signum);
 
 /* LEXER & PARSER */
 
 int 	find_nb_proc(void);
 int		lexer_prompt(void);
 int		init_processes(void);
+int		lexer_empty_line(void);
 // int 	gestion_var_size(int i, char *str);
 // int		gestion_var_size(int j, int k);
-// int		val_strncmp(char *stra, char *val, int length);
+int		val_strncmp(char *stra, char *val, int length);
+void	val_strlcpy(char *dst, char *src, int size);
 int		parsing_prompt(void);
-void	size_expand(void);
+void	size_expand(int i, int count);
 /* TOKENS */
 
 int 	init_tokens(void);
 void	find_nb_tokens(int j);
 void	all_token_types(void);
 void	copy_token(int i, int j, char *str);
-// void	val_strlcpy(char *dst, char *src, int size);
 int		size_error(void);
 int		itoa_remixed(char *dst);
 
@@ -151,7 +152,7 @@ void 	ft_exit(int i);
 
 /* MAIN FUNCS*/
 
-void	minishell(void);
+void	minishell(int i);
 
 /* EXECUTION */
 

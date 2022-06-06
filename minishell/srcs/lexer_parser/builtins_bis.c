@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_bis.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:48:02 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:51:14 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/202
 	return_chdir = chdir(path); //j'essaie de changer de directory 
 	if (return_chdir == -1)
 	{
-		if (val_strncmp(".."))
 		if (open(path, O_RDONLY) == -1)
 		{
 			printf("cd: no such file or directory: %s\n", path);

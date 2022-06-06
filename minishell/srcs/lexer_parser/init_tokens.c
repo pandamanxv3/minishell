@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:07:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/05/30 16:27:28 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:19:38 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ int init_tokens(void)
 		j = 0;
 		g_shell.tab_proc[i].index = 0;
 		while (j < g_shell.tab_proc[i].nb_tokens)
-		{
-		
+		{		
 			size_malloc_tokens(i, j, g_shell.tab_proc[i].str);
-			//printf("taille TOKEN : %d\n", g_shell.tab_proc[i].tab_token[j].word_malloc_count);
-			//printf("MALLOC_TOKEN [%d][%d]: %d\n", i, j, g_shell.tab_proc[i].tab_token[j].word_malloc_count);
 			if (malloc_tokens(i, j) == 1)
 				return (1);
 			j++;
@@ -85,9 +82,6 @@ int init_tokens(void)
 		while (j < g_shell.tab_proc[i].nb_tokens)
 		{
 			copy_token(i, j, g_shell.tab_proc[i].str);
-			//printf("INDEX PROC : %d\n", i);
-			//printf("INDEX TOKEN : %d\n", j);
-			//printf("TOKEN[%d][%d] WORD %s\n", i, j, g_shell.tab_proc[i].tab_token[j].word);
 			j++;
 		}
 		i++;

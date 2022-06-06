@@ -98,7 +98,7 @@ void	*ft_malloc(char *type, int size, char *msg, t_gc *lst);
 void	ft_gcadd_back(t_gc *lst, t_gc *new);
 void	ft_gcclear(t_gc *lst);
 t_gc	*ft_gcnew(void *data, t_gc *lst);
-void	mallocreturn_failed(t_gc *gc, char *msg);
+void	mallocreturn_failed(t_gc *gc, t_gc *gc2, char *msg);
 void	*malloc_env(char *errormsg, t_gc *mallocs);
 
 
