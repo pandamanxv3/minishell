@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 20:30:12 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:42:05 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_minishell	g_shell;
 
-static void	builtin_share4(int i, int j, int count, int first_word)
+static void	builtin_share4(int i, int count, int first_word)
 {
 	if (count == 0)
 		ft_chdir(NULL);
@@ -53,7 +53,7 @@ static void	builtin_share3(int i, int j, int count)
 			}
 			j++;
 		}
-		builtin_share4(i, j, count, first_word);
+		builtin_share4(i, count, first_word);
 	}
 }
 
