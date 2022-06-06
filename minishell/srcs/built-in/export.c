@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:25 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 14:05:37 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:35:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,11 @@ static int	export_while(char *word, int i)
 			return (-1);
 		}
 		if (i == 0 && ft_isdigit(word[i]))
-		{
 			g_shell.error = 1;
-			ft_putstr_fd("export: '", 2);
-			write(2, word, ft_strlen(word));
-			ft_putendl_fd("': not a valid identifier", 2);
-			return (-1);
-		}
 		if (ft_isalnum(word[i]) == 0 && word[i] != '_')
-		{
 			g_shell.error = 127;
+		if (g_shell.error == 1 || g_shell.error == 127)
+		{
 			ft_putstr_fd("export: '", 2);
 			write(2, word, ft_strlen(word));
 			ft_putendl_fd("': not a valid identifier", 2);
