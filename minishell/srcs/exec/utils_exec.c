@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:55:17 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/03 16:30:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 11:38:46 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_error(char *msg)
 void	ft_wait(void)
 {
 	int	i;
-	int val;
+	int	val;
 
 	val = 0;
 	i = 0;
