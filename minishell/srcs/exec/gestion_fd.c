@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 22:09:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 17:26:21 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:58:19 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	dispatch_fd(int i, int j, char *word)
 		if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
 			close(g_shell.tab_proc[i].in_fd);
 		g_shell.tab_proc[i].in_fd = g_shell.tab_proc[i].hd_fd[g_shell.tab_proc[i].index++];
-		printf("EXEC fd : %d index: %d\n", g_shell.tab_proc[i].hd_fd[g_shell.tab_proc[i].index - 1],	g_shell.tab_proc[i].index);
 	}
 	else if (g_shell.tab_proc[i].tab_token[j].type == OUTFILE_APPEND)
 	{

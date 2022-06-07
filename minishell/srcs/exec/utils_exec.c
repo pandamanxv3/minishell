@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:55:17 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/03 16:30:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:58:07 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_wait(void)
 	{
 		if (wait(&val) == g_shell.pid[g_shell.nb_proc - 1])
 			g_shell.error = WEXITSTATUS(val);
-		printf("val: %d\n", g_shell.error);
+		// printf("val: %d\n", g_shell.error);
 		i++;
 	}
 }
