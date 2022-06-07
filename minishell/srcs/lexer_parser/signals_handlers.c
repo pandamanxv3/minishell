@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:30:17 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 17:28:58 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:17:56 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	sighandler_int(int signum)
 		printf("ssss\n");
 	}
 	else if (signum == SIGINT && g_shell.in_prog == 1)
-		;
+		ft_putstr_fd("\n", 2);
 	else if (signum == SIGQUIT && g_shell.in_prog == 0)
 			ft_putstr_fd("\b\b  \b\b", 1);
 	else if (signum == SIGQUIT && g_shell.in_prog == 1)

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 16:20:22 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:16:36 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	child(int i)
 	int	j;
 
 	j = 0;
-	//puts("coucou from child");
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	exec_fd(i, 0, 0);
 	if (i < g_shell.nb_proc - 1)
 		close(g_shell.tab_proc[i + 1].in_fd);
@@ -118,6 +119,7 @@ static int	dup_builtin(int i, int j, int save_in)
 
 void	dispatch_exec(int i, int j)
 {
+	g_shell.in_prog = 1;
 	g_shell.pid = ft_malloc("int", g_shell.nb_proc, "err pid", g_shell.gc2);
 	while (i < g_shell.nb_proc)
 	{
