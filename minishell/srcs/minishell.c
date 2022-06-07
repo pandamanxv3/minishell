@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 18:45:41 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/07 11:42:40 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parsing_prompt(void)
 	if (init_tokens() == 1)
 		return (1);
 	all_token_types();
-	return (0);	
+	return (0);
 }
 
 void	minishell(int i)
@@ -51,7 +51,7 @@ void	minishell(int i)
 		if (lexer_prompt() == 0)
 		{
 			if (parsing_prompt() == 0)
-				dispatch_exec(0,0);
+				dispatch_exec(0, 0);
 		}
 		ft_free(g_shell.gc2);
 	}
@@ -61,7 +61,6 @@ int	main(int argc, char **argv, char *env[])
 {
 	(void)argc;
 	(void)argv;
-
 	g_shell.gc = ft_gcnew(NULL, NULL);
 	g_shell.lst_env = get_env(env, g_shell.gc);
 	minishell(0);
