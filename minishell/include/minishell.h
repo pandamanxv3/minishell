@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 18:46:07 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:26:08 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 
 /* LIBRARIES */
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <stddef.h>
-# include <errno.h>
-# include <string.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdbool.h> 
-# include <limits.h>
-# include "../libft/include/libft.h"
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stddef.h>
+#include <errno.h>
+#include <string.h>
+#include <signal.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <stdbool.h> 
+#include <limits.h>
+#include "../libft/include/libft.h"
 
 /* DEFINED VARIABLES */
 
@@ -58,6 +58,7 @@ typedef struct	s_process
 	char	*path; //path de la commande?
 	int		in_fd;
 	int		out_fd;
+	int		hd_fd[1024];
 	int		nb_tokens;
 	t_token	*tab_token;
 }	t_process;
@@ -86,12 +87,15 @@ typedef struct	s_minishell
 	char		*line;
 	int			length_line;
 	int			index_hd;
+	int			is_in_hd;
+	int			in_prog;
 	int			tab_index_pipes[512];
 	pid_t		*pid;
 	int			error;
 	int			unset_pwd;
 	char		*temp_old_dir;
 	char		*pwd;
+	int			save_in;
 	t_gc		*gc; //gc global
 	t_gc		*gc2; //gc propre a chaque line de minishell
 	t_env		*lst_env; // liste chainee dans laquelle est stockee l'env
@@ -107,26 +111,25 @@ void	size_malloc_tokens(int i, int j, char *str);
 /* SIGNALS */
 
 void	sighandler_int(int signum);
-// void	sighandler_quit(int signum);
+void	sighandler_quit(int signum);
 
 /* LEXER & PARSER */
 
 int 	find_nb_proc(void);
 int		lexer_prompt(void);
 int		init_processes(void);
-int		lexer_empty_line(void);
-// int 	gestion_var_size(int i, char *str);
-// int		gestion_var_size(int j, int k);
+int     gestion_var_size(int j, int k);
 int		val_strncmp(char *stra, char *val, int length);
-void	val_strlcpy(char *dst, char *src, int size);
 int		parsing_prompt(void);
 void	size_expand(int i, int count);
+int		lexer_empty_line(void);
 /* TOKENS */
 
 int 	init_tokens(void);
 void	find_nb_tokens(int j);
 void	all_token_types(void);
 void	copy_token(int i, int j, char *str);
+void	val_strlcpy(char *dst, char *src, int size);
 int		size_error(void);
 int		itoa_remixed(char *dst);
 
@@ -154,15 +157,20 @@ void 	ft_exit(int i);
 
 void	minishell(int i);
 
+/* REDIRECTIONS */
+
+int     ft_open(char *str, int type);
+char	*new_enumerated_empty_file(char *prefix, int sequence);
+int		is_file_created_successfully(char *file_name);
+void	dispatch_here_doc(int i, int j);
+void	ft_heredoc(char *limiter, int i);
+void	ft_close(int i);
+
 /* EXECUTION */
 
+void	exec_fd(int i, int child_or_parents, int j);
 void    dispatch_exec(int i, int j);
 void    child(int i);
-void	exec_fd(int i, int child_or_parents, int j);
-// void	exec_fd(int i, int child_or_parents);
-int     ft_open(char *str, int type);
-int     ft_heredoc(char *limiter);
-void	ft_close(int i);
 
 /* UTILS EXECUTION */
 
@@ -177,3 +185,4 @@ void	ft_wait(void);
 char	*ft_strjoin_and_replace(char *s1, char *s2, int i);
 
 #endif
+

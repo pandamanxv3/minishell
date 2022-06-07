@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 18:45:41 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:24:06 by cbarbit          ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
@@ -16,6 +18,11 @@ t_minishell	g_shell;
 
 int	parsing_prompt(void)
 {
+	size_expand(0, 0);
+	if (lexer_empty_line() == 1)
+		return (1);
+	g_shell.in_prog = 0;
+	g_shell.is_in_hd = 0;
 	size_expand(0, 0);
 	if (lexer_empty_line() == 1)
 		return (1);
@@ -50,8 +57,18 @@ void	minishell(int i)
 		add_history(g_shell.line);
 		if (lexer_prompt() == 0)
 		{
+			// if (parsing_prompt() == 0)
+			// 	dispatch_exec(0,0);
+			// if (parsing_prompt() == 1)
+			// 	;
+			// //printf("%s\n", g_shell.tab_proc[0].tab_token[0].word);
+			// dispatch_exec(0,0);
 			if (parsing_prompt() == 0)
-				dispatch_exec(0,0);
+			{
+				dispatch_here_doc(0, 0);
+				if (g_shell.is_in_hd != 2)
+					dispatch_exec(0,0);
+			}
 		}
 		ft_free(g_shell.gc2);
 	}
