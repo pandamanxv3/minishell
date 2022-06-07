@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 16:20:22 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:01:11 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ static void	ft_execve(int i, int j)
 			if (g_shell.tab_proc[i].tab_token[j].word[0])
 			{
 				g_shell.error = 127;	
-		// 		write(2, "command not found: ", 19);
+				write(2, "command not found: ", 19);
 			}
 			else
 			{
 		 		g_shell.error = 1;
-		// 		write(2, "permission denied:", 18);
+				write(2, "permission denied:", 18);
 			}
-		// 	write(2, g_shell.tab_proc[i].tab_token[j].word,
-		// 		ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
-		// 	write(2, "\n", 1);
+			write(2, g_shell.tab_proc[i].tab_token[j].word,
+				ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
+			write(2, "\n", 1);
 			perror(g_shell.tab_proc[i].tab_token[j].word);
 			ft_free(g_shell.gc2);
 			ft_free(g_shell.gc);
@@ -47,8 +47,9 @@ void	child(int i)
 	int	j;
 
 	j = 0;
-	//puts("coucou from child");
 	exec_fd(i, 0, 0);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (i < g_shell.nb_proc - 1)
 		close(g_shell.tab_proc[i + 1].in_fd);
 	if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
@@ -125,6 +126,7 @@ void	dispatch_exec(int i, int j)
 			ft_create_pipe(i);
 		if (g_shell.nb_proc == 1)
 		{
+			// printf("val : %d\n", )
 			while (j < g_shell.tab_proc[i].nb_tokens - 1
 				&& g_shell.tab_proc[i].tab_token[j].type != BUILTIN
 				&& g_shell.tab_proc[i].tab_token[j].type != COMMAND)
@@ -132,6 +134,7 @@ void	dispatch_exec(int i, int j)
 			if (dup_builtin(i, j, 0) == 0)
 				return ;
 		}
+		g_shell.in_prog = 1;
 		g_shell.pid[i] = fork();
 		if (g_shell.pid[i] < 0)
 			ft_error("fork failed");
