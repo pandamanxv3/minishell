@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:41:48 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 18:34:40 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 22:10:10 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	lexer_redir(int i)
 	{
 		i++;
 		if (g_shell.line[i] == '\0')
-			return (-1);			
+			return (-1);
 	}
 	d = i;
 	while (g_shell.line[i] && g_shell.line[i] != '>' && g_shell.line[i] != '<'
@@ -53,20 +53,16 @@ static int	lexer_redir(int i)
 	{
 		if (g_shell.line[i] == '"' || g_shell.line[i] == '\'')
 		{
-			// printf("i before = %d\n", i);
 			i = lexer_quote(i);
 			if (i == -1)
 				return (-1);
-			// printf("i after = %d\n", i);
 		}
 		i++;
 	}
-	// puts("coucou");
 	if (d == i)
 		return (-1);
 	if (g_shell.line[i - 1] == '"' || g_shell.line[i] == '\'')
 		i = i + 1;
-	// printf("i after = %d\n", i);
 	return (i);
 }
 
