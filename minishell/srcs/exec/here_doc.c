@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:16:20 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 20:24:00 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:45:04 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,103 +14,15 @@
 
 extern t_minishell	g_shell;
 
-static int	copy_var_hd2(char *copy, char *str, int j)
+static void	ft_heredoc2(char *file_name, int i)
 {
-	int		k;
-	t_env	*temp;
-
-	temp = g_shell.lst_env;
-	while (temp)
-	{
-		k = val_strncmp((str + j), temp->var, (g_shell.index_hd - j));
-		if (k == 0)
-		{
-			k = ft_strlen(temp->val);
-			val_strlcpy(copy, temp->val, k);
-			return (k);
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
-
-static int	copy_var_hd(char *copy, char *str)
-{
-	int		j;
-
-	g_shell.index_hd++;
-	if (str[g_shell.index_hd] && (ft_isalpha(str[g_shell.index_hd]) == 1
-			|| str[g_shell.index_hd] == '_' || str[g_shell.index_hd] == '?'))
-		j = g_shell.index_hd;
+	if (g_shell.is_in_hd != 2)
+		g_shell.tab_proc[i].hd_fd[g_shell.tab_proc[i].index] \
+			= ft_open(file_name, 0);
 	else
-	{
-		copy[0] = '$';
-		return (1);
-	}
-	if (str[g_shell.index_hd++] == '?')
-		return (itoa_remixed(copy));
-	while ((ft_isalnum(str[g_shell.index_hd]) == 1
-			|| str[g_shell.index_hd] == '_') && str[g_shell.index_hd])
-		g_shell.index_hd++;
-	return (copy_var_hd2(copy, str, j));
-}
-
-static int	gestion_var_size_hd(int j, int k, char *str)
-{
-	t_env	*temp;
-
-	g_shell.index_hd++;
-	j = g_shell.index_hd;
-	if (str[g_shell.index_hd] == '?')
-		return (size_error());
-	if (ft_isalpha(str[g_shell.index_hd]) == 0
-		&& str[g_shell.index_hd] != '_')
-		return (1);
-	g_shell.index_hd++;
-	while (ft_isalnum(str[g_shell.index_hd]) == 1
-		|| str[g_shell.index_hd] == '_')
-		g_shell.index_hd++;
-	temp = g_shell.lst_env;
-	while (temp)
-	{
-		k = val_strncmp((str + j), temp->var, (g_shell.index_hd - j));
-		if (k == 0)
-		{
-			k = ft_strlen(temp->val);
-			return (k);
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
-
-static char	*heredoc_replace(char *tmp, int count, int count2)
-{
-	char	*dst;
-
-	g_shell.index_hd = 0;
-	while (tmp[g_shell.index_hd])
-	{
-		if (tmp[g_shell.index_hd] == '$')
-			count += gestion_var_size_hd(0, 0, tmp);
-		else
-		{
-			count++;
-			g_shell.index_hd++;
-		}
-	}
-	dst = ft_malloc("str", count, "error malloc here_doc", g_shell.gc2);
-	dst[count] = '\0';
-	g_shell.index_hd = 0;
-	while (tmp[g_shell.index_hd])
-	{
-		if (tmp[g_shell.index_hd] == '$')
-			count2 += copy_var_hd(dst + count2, tmp);
-		else
-			dst[count2++] = tmp[g_shell.index_hd++];
-	}
-	free(tmp);
-	return (dst);
+		dup2(g_shell.save_in, STDIN_FILENO);
+	g_shell.tab_proc[i].index++;
+	free(file_name);
 }
 
 void	ft_heredoc(char *limiter, int i)
@@ -119,14 +31,14 @@ void	ft_heredoc(char *limiter, int i)
 	int		fd;
 	int		size;
 	char	*file_name;
-	
+
 	size = ft_strlen(limiter);
 	file_name = new_enumerated_empty_file("/tmp/tempheredoc", 0);
 	fd = ft_open(file_name, 1);
 	while (1)
 	{
 		tmp = readline("> ");
-		if (!tmp || !val_strncmp(tmp, limiter, size) || g_shell.is_in_hd == 2) 
+		if (!tmp || !val_strncmp(tmp, limiter, size) || g_shell.is_in_hd == 2)
 			break ;
 		if (ft_strchr(tmp, '$'))
 			tmp = heredoc_replace(tmp, 0, 0);
@@ -136,12 +48,7 @@ void	ft_heredoc(char *limiter, int i)
 	}
 	free(tmp);
 	close(fd);
-	if (g_shell.is_in_hd != 2)
-		g_shell.tab_proc[i].hd_fd[g_shell.tab_proc[i].index] = ft_open(file_name, 0);
-	else
-		dup2(g_shell.save_in, STDIN_FILENO);
-	g_shell.tab_proc[i].index++;
-	free(file_name);
+	ft_heredoc2(file_name, i);
 }
 
 int	is_file_created_successfully(char *file_name)
@@ -166,7 +73,7 @@ char	*new_enumerated_empty_file(char *prefix, int sequence)
 	char	*file_name;
 	char	*suffix_name;
 	int		fd;
-	
+
 	while (++sequence)
 	{
 		suffix_name = ft_itoa(sequence);

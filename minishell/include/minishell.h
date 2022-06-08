@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 00:55:41 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:51:30 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int		val_strncmp(char *stra, char *val, int length);
 int		parsing_prompt(void);
 void	size_expand(int i, int count);
 int		lexer_empty_line(void);
+
 /* TOKENS */
 
 int 	init_tokens(void);
@@ -151,7 +152,7 @@ void	print_env(t_env *env);
 void	ft_pwd(void);
 void	ft_chdir(char *path);
 void    builtin_share(int i, int j);
-void 	ft_exit(int i);
+void 	ft_exit(int i, int new_exit);
 
 /* MAIN FUNCS*/
 
@@ -163,6 +164,7 @@ int     ft_open(char *str, int type);
 char	*new_enumerated_empty_file(char *prefix, int sequence);
 int		is_file_created_successfully(char *file_name);
 void	dispatch_here_doc(int i, int j);
+char	*heredoc_replace(char *tmp, int count, int count2);
 void	ft_heredoc(char *limiter, int i);
 void	ft_close(int i);
 

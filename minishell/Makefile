@@ -6,7 +6,7 @@
 #    By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
-#    Updated: 2022/06/06 17:54:55 by aboudjel         ###   ########.fr        #
+#    Updated: 2022/06/08 04:45:49 by aboudjel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ C_FILES =	srcs/minishell.c \
 			srcs/exec/execution.c \
 			srcs/exec/utils_exec.c \
 			srcs/exec/here_doc.c \
+			srcs/exec/here_doc_utils.c \
 			srcs/exec/gestion_fd.c \
 			srcs/exec/get_tab_exec2.c \
 			srcs/built-in/built_in_dispatcher.c \

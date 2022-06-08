@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:50:10 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 21:12:10 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:49:15 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	gestion_var_size(int j, int k)
 
 static int	on_simple_quote_var(void)
 {
-	int count;
+	int	count;
 
 	count = 1;
 	g_shell.index_hd++;
@@ -134,7 +134,7 @@ static int copy_on_simple_quote_var(char *str)
 		str[i++] = g_shell.line[g_shell.index_hd++];
 	}
 	str[i++] = g_shell.line[g_shell.index_hd++];
-	return(i);
+	return (i);
 }
 
 void	size_expand(int i, int count)

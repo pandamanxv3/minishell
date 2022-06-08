@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:41:49 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 00:18:38 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:51:16 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ void	print_error(char *msg1, char *msg2, char *msg3)
 	}
 }
 
-void	ft_exit(int i)
+void	ft_exit(int i, int new_exit)
 {
-	int	new_exit;
-
-	new_exit = 0;
 	if (g_shell.nb_proc == 1)
 		write(2, "exit\n", 5);
 	if (g_shell.tab_proc[i].nb_tokens > 1)

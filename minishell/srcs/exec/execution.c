@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 01:54:22 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:31:00 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	ft_execve(int i, int j)
 		{
 			if (g_shell.tab_proc[i].tab_token[j].word[0])
 			{
-				g_shell.error = 127;	
+				g_shell.error = 127;
 				write(2, "command not found: ", 19);
 			}
 			else
 			{
-		 		g_shell.error = 1;
+				g_shell.error = 1;
 				write(2, "permission denied:", 18);
 			}
 			write(2, g_shell.tab_proc[i].tab_token[j].word,

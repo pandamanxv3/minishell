@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:38:31 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 01:12:05 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:52:16 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	n_or_not(int i, int n)
 {
 	int	type;
 	int	j;
-	
+
 	j = 0;
 	type = g_shell.tab_proc[i].tab_token[j].type;
 	g_shell.error = 0;
@@ -37,7 +37,7 @@ void	ft_echo(int i, int j, int space)
 {
 	int	type;
 
-	while ( g_shell.tab_proc[i].tab_token[j].type != WORD
+	while (g_shell.tab_proc[i].tab_token[j].type != WORD
 		&& j < g_shell.tab_proc[i].nb_tokens)
 		j++;
 	type = g_shell.tab_proc[i].tab_token[j].type;

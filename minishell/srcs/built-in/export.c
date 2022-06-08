@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:25 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 04:13:37 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:57:40 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	plus_env(char *word, int i)
 
 static int	export_while(char *word, int i)
 {
-	while (word[i] && word[i] != '=')
+	while (word[++i] && word[i] != '=')
 	{
 		if (i > 0 && word[i] == '+' && word[i + 1] == '=')
 		{
@@ -90,7 +90,6 @@ static int	export_while(char *word, int i)
 			ft_putendl_fd("': not a valid identifier", 2);
 			return (-1);
 		}
-		i++;
 	}
 	return (i);
 }
@@ -98,6 +97,7 @@ static int	export_while(char *word, int i)
 void	ft_export(char *word)
 {
 	int	i;
+
 	if (word[0] == '=')
 	{
 		g_shell.error = 1;
@@ -106,16 +106,13 @@ void	ft_export(char *word)
 		ft_putendl_fd("': not a valid identifier", 2);
 		return ;
 	}
-	i = export_while(word, 0);
+	i = export_while(word, -1);
 	if (i == -1)
 		return ;
 	if (word[i] == '=')
 	{
 		if (!g_shell.lst_env)
-		{
-			puts("sisi");
 			g_shell.lst_env = get_envlst(word, g_shell.gc);
-		}
 		else if (read_env(word, i) == 0)
 			replace_env(word, i);
 		else

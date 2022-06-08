@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 01:09:12 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:50:45 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	builtin_share(int i, int j)
 	else if (val_strncmp("env", builtin, 3) == 0)
 		print_env(g_shell.lst_env);
 	else if (val_strncmp("exit", builtin, 4) == 0)
-		ft_exit(i);
+		ft_exit(i, 0);
 	else
 	 builtin_share2(i, j, builtin);
 }

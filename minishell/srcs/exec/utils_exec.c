@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:55:17 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/07 17:58:07 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 04:31:40 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_error(char *msg)
 void	ft_wait(void)
 {
 	int	i;
-	int val;
+	int	val;
 
 	val = 0;
 	i = 0;
@@ -53,7 +53,6 @@ void	ft_wait(void)
 	{
 		if (wait(&val) == g_shell.pid[g_shell.nb_proc - 1])
 			g_shell.error = WEXITSTATUS(val);
-		// printf("val: %d\n", g_shell.error);
 		i++;
 	}
 }

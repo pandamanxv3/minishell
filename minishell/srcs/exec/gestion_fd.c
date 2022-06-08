@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 22:09:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 00:37:38 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:47:09 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	dispatch_fd(int i, int j, char *word)
 	{
 		if (g_shell.tab_proc[i].in_fd != STDIN_FILENO)
 			close(g_shell.tab_proc[i].in_fd);
-		g_shell.tab_proc[i].in_fd = g_shell.tab_proc[i].hd_fd[g_shell.tab_proc[i].index++];
+		g_shell.tab_proc[i].in_fd \
+		= g_shell.tab_proc[i].hd_fd[g_shell.tab_proc[i].index++];
 	}
 	else if (g_shell.tab_proc[i].tab_token[j].type == OUTFILE_APPEND)
 	{
