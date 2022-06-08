@@ -40,4 +40,3 @@ char	*ft_strjoin(char *s1, char *s2)
 	dst[i] = '\0';
 	return (dst);
 }
-

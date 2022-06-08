@@ -101,7 +101,6 @@ t_gc	*ft_gcnew(void *data, t_gc *lst);
 void	mallocreturn_failed(t_gc *gc, t_gc *gc2, char *msg);
 void	*malloc_env(char *errormsg, t_gc *mallocs);
 
-
 /* 
  -init le gc avec gc = ft_gcnew(NULL, NULL);
  -puis ft_malloc(type de variable, taille, msg derror,et le gc) a chaque fois que
