@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_bis.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 17:51:14 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:56:31 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static char	*get_home_val(void)
 	char	*path;
 
 	current = g_shell.lst_env;
+	path = NULL;
 	while(current)
 	{
 		if (val_strncmp("HOME", current->var, 4) == 0)
@@ -108,6 +109,12 @@ void	ft_chdir(char *path) // PWD ne marche pas dans un dossier suprimer 2/06/202
 	{
 		if (open(path, O_RDONLY) == -1)
 		{
+			if (path == NULL)
+			{
+				printf("cd: HOME variable not set\n");
+				g_shell.error = 1;
+				return ;
+			}
 			printf("cd: no such file or directory: %s\n", path);
 			g_shell.error = 1;
 			return ;
