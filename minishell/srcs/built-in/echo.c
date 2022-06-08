@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:38:31 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 04:52:16 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 05:13:17 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	ft_echo(int i, int j, int space)
 {
 	int	type;
 
-	while (g_shell.tab_proc[i].tab_token[j].type != WORD
-		&& j < g_shell.tab_proc[i].nb_tokens)
+	while (j < g_shell.tab_proc[i].nb_tokens
+		&& g_shell.tab_proc[i].tab_token[j].type != WORD)
 		j++;
 	type = g_shell.tab_proc[i].tab_token[j].type;
 	while (j < g_shell.tab_proc[i].nb_tokens)

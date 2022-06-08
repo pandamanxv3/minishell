@@ -6,7 +6,7 @@
 #    By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
-#    Updated: 2022/06/08 04:45:49 by aboudjel         ###   ########.fr        #
+#    Updated: 2022/06/08 05:18:23 by aboudjel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = minishell
 C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/lexer_all.c \
 			srcs/lexer_parser/expand.c \
+			srcs/lexer_parser/expand_utils.c \
 			srcs/lexer_parser/env_lst.c \
 			srcs/lexer_parser/signals_handlers.c \
 			srcs/lexer_parser/init_processes.c \
@@ -26,10 +27,10 @@ C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/utils_parsing.c \
 			srcs/exec/execution.c \
 			srcs/exec/utils_exec.c \
-			srcs/exec/here_doc.c \
-			srcs/exec/here_doc_utils.c \
-			srcs/exec/gestion_fd.c \
 			srcs/exec/get_tab_exec2.c \
+			srcs/redirections/here_doc.c \
+			srcs/redirections/here_doc_utils.c \
+			srcs/redirections/gestion_fd.c \
 			srcs/built-in/built_in_dispatcher.c \
 			srcs/built-in/export.c \
 			srcs/built-in/exit.c \

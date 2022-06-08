@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 04:31:00 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 05:15:08 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ static int	dup_builtin(int i, int j, int save_in, int save_out)
 	if (g_shell.tab_proc[i].tab_token[j].type == COMMAND
 		|| val_strncmp("echo", g_shell.tab_proc[i].tab_token[j].word, 4) == 0)
 		return (1);
-	puts("salut");
 	exec_fd(i, 1, 0);
 	if (g_shell.tab_proc[i].in_fd >= 0)
 	{

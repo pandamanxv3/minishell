@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 04:51:30 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 05:16:54 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int		val_strncmp(char *stra, char *val, int length);
 int		parsing_prompt(void);
 void	size_expand(int i, int count);
 int		lexer_empty_line(void);
+int		setup_copy_var(char *copy);
 
 /* TOKENS */
 
