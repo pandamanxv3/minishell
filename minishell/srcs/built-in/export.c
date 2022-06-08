@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:25 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 03:15:06 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 04:13:37 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ static int	export_while(char *word, int i)
 void	ft_export(char *word)
 {
 	int	i;
-
 	if (word[0] == '=')
 	{
 		g_shell.error = 1;
@@ -112,7 +111,12 @@ void	ft_export(char *word)
 		return ;
 	if (word[i] == '=')
 	{
-		if (read_env(word, i) == 0)
+		if (!g_shell.lst_env)
+		{
+			puts("sisi");
+			g_shell.lst_env = get_envlst(word, g_shell.gc);
+		}
+		else if (read_env(word, i) == 0)
 			replace_env(word, i);
 		else
 			add_env(g_shell.lst_env, get_envlst(word, g_shell.gc));

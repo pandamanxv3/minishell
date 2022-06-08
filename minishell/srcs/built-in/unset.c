@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:31:05 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 14:17:39 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 03:42:35 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	unset(char *str)
 
 	i = 0;
 	if (!str[i])
+		return ;
+	if (!g_shell.lst_env)
 		return ;
 	if (val_strncmp(str, "PWD", ft_strlen(str)) && g_shell.unset_pwd != -1)
 		g_shell.unset_pwd = 1;
