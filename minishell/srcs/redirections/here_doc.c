@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:16:20 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 18:25:17 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 19:35:58 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	ft_heredoc(char *limiter, int i)
 		tmp = readline("> ");
 		if (!tmp || !val_strncmp(tmp, limiter, size) || g_shell.is_in_hd == 2)
 		{
-			printf("warning: here-document closed by EOF\n");
+			if (!tmp)
+				printf("warning: here-document closed by EOF\n");
 			break ;			
 		}
 		if (ft_strchr(tmp, '$'))
