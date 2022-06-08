@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:16:20 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 21:14:31 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 21:17:05 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,36 +50,6 @@ char	*new_enumerated_empty_file(char *prefix, int sequence)
 	}
 	return (NULL);
 }
-
-// void	ft_heredoc(char *limiter, int i)
-// {
-// 	char	*tmp;
-// 	int		fd;
-// 	int		size;
-// 	char	*file_name;
-
-// 	size = ft_strlen(limiter);
-// 	file_name = new_enumerated_empty_file("/tmp/tempheredoc", 0);
-// 	fd = ft_open(file_name, 1);
-// 	while (1)
-// 	{
-// 		tmp = readline("> ");
-// 		if (!tmp || !val_strncmp(tmp, limiter, size) || g_shell.is_in_hd == 2)
-// 		{
-// 			if (!tmp)
-// 				printf("warning: here-document closed by EOF\n");
-// 			break ;			
-// 		}
-// 		if (ft_strchr(tmp, '$'))
-// 			tmp = heredoc_replace(tmp, 0, 0);
-// 		write(fd, tmp, ft_strlen(tmp));
-// 		write(fd, "\n", 1);
-// 		free(tmp);
-// 	}
-// 	free(tmp);
-// 	close(fd);
-// 	ft_heredoc2(file_name, i);
-// }
 
 void    ft_heredoc(char *limiter, int i)
 {
