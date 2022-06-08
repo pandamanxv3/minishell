@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:07:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 18:19:38 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 22:05:26 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,27 @@ extern t_minishell	g_shell;
 
 void	find_nb_tokens(int j)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	g_shell.tab_proc[j].nb_tokens = 0;
-	while(g_shell.tab_proc[j].str[i])
+	while (g_shell.tab_proc[j].str[i])
 	{
 		while (g_shell.tab_proc[j].str[i] == ' ')
 			i++;
-		if (g_shell.tab_proc[j].str[i] == '>' || g_shell.tab_proc[j].str[i] == '<')
+		if (g_shell.tab_proc[j].str[i] == '>'
+			|| g_shell.tab_proc[j].str[i] == '<')
 		{
 			i++;
-			if (g_shell.tab_proc[j].str[i] == '>' || g_shell.tab_proc[j].str[i] == '<')
+			if (g_shell.tab_proc[j].str[i] == '>'
+				|| g_shell.tab_proc[j].str[i] == '<')
 				i++;
 			g_shell.tab_proc[j].nb_tokens++;
 		}
-		while (g_shell.tab_proc[j].str[i] != ' ' && g_shell.tab_proc[j].str[i] != '\0' && g_shell.tab_proc[j].str[i] != '>' && g_shell.tab_proc[j].str[i] != '<')
+		while (g_shell.tab_proc[j].str[i] != ' '
+			&& g_shell.tab_proc[j].str[i] != '\0'
+			&& g_shell.tab_proc[j].str[i] != '>'
+			&& g_shell.tab_proc[j].str[i] != '<')
 		{
 			if (g_shell.tab_proc[j].str[i] == '"')
 			{
@@ -40,7 +45,7 @@ void	find_nb_tokens(int j)
 				{
 					i++;
 					if (g_shell.tab_proc[j].str[i] == '"')
-						break;
+						break ;
 				}
 			}
 			if (g_shell.tab_proc[j].str[i] == '\'')
@@ -50,21 +55,24 @@ void	find_nb_tokens(int j)
 				{
 					i++;
 					if (g_shell.tab_proc[j].str[i] == '\'')
-						break;
+						break ;
 				}
 			}
 			i++;
-			if (g_shell.tab_proc[j].str[i] == ' ' || g_shell.tab_proc[j].str[i] == '\0' || g_shell.tab_proc[j].str[i] == '>' || g_shell.tab_proc[j].str[i] == '<')
-				g_shell.tab_proc[j].nb_tokens++;		
+			if (g_shell.tab_proc[j].str[i] == ' '
+				|| g_shell.tab_proc[j].str[i] == '\0'
+				|| g_shell.tab_proc[j].str[i] == '>'
+				|| g_shell.tab_proc[j].str[i] == '<')
+				g_shell.tab_proc[j].nb_tokens++;
 		}
 	}
 }
 
-int init_tokens(void)
+int	init_tokens(void)
 {
-	int i;
-	int j;
-    
+	int	i;
+	int	j;
+
 	i = 0;
 	while (i < g_shell.nb_proc)
 	{
