@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 21:27:43 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 21:34:41 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ void	ft_chdir(char *path)
 	{
 		ft_export("OLDPWD=");
 		old_pwd = g_shell.temp_old_dir;
-		read_and_replace_envCD("OLDPWD", old_pwd);
+		read_and_replace_env_cd("OLDPWD", old_pwd);
 		g_shell.unset_pwd = 0;
 		return ;
 	}
 	ft_pwd();
-	read_and_replace_envCD("PWD", g_shell.pwd);
-	read_and_replace_envCD("OLDPWD", tempo);
+	read_and_replace_env_cd("PWD", g_shell.pwd);
+	read_and_replace_env_cd("OLDPWD", tempo);
 }
