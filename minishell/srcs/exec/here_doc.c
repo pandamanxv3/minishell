@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:16:20 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 17:32:03 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:24:00 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_heredoc(char *limiter, int i)
 	char	*file_name;
 	
 	size = ft_strlen(limiter);
-	file_name = new_enumerated_empty_file("/tmp/.minishell_heredoc", 0);
+	file_name = new_enumerated_empty_file("/tmp/tempheredoc", 0);
 	fd = ft_open(file_name, 1);
 	while (1)
 	{

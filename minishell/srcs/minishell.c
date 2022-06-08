@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 17:24:06 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 02:00:24 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	parsing_prompt(void)
 	size_expand(0, 0);
 	if (lexer_empty_line() == 1)
 		return (1);
-	g_shell.in_prog = 0;
-	g_shell.is_in_hd = 0;
 	size_expand(0, 0);
 	if (lexer_empty_line() == 1)
 		return (1);
@@ -38,23 +36,25 @@ int	parsing_prompt(void)
 
 void	minishell(int i)
 {
+	signal(SIGINT, sighandler_int);
+	signal(SIGQUIT, sighandler_int);
 	while (1)
 	{
-		signal(SIGINT, sighandler_int);
-		signal(SIGQUIT, sighandler_int);
+		g_shell.in_prog = 0;
+		g_shell.is_in_hd = 0;
 		g_shell.line = readline(MINISHELL);
 		if (g_shell.line == NULL)
 		{
 			printf(" exit\n");
 			free(g_shell.line);
 			ft_free(g_shell.gc);
-			exit(1);
+			exit(0);
 		}
+		add_history(g_shell.line);
 		g_shell.gc2 = ft_gcnew(NULL, NULL);
 		ft_gcadd_back(g_shell.gc2, ft_gcnew(g_shell.line, g_shell.gc2));
 		if (i++ == 0)
 			ft_pwd();
-		add_history(g_shell.line);
 		if (lexer_prompt() == 0)
 		{
 			// if (parsing_prompt() == 0)

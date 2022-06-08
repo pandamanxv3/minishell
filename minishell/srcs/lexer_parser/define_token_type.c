@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_token_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:46:04 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 12:04:52 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 03:14:46 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	all_token_types(void)
 				word_or_word_n(i, j);
 			j++;
 		}
-		//print_type(i);
+		// print_type(i);
 		i++;
 	}
 }

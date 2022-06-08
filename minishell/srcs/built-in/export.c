@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:25 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 14:05:37 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 03:15:06 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	plus_env(char *word, int i)
 	{
 		if (val_strncmp(word, current->var, i) == 0)
 		{
-			printf("str print :%s\n", word);
 			current->val = ft_strjoin(current->val, word + i + 2);
 			if (!current->val)
 				ft_error("error malloc du export +=");

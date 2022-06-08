@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:41:49 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 18:06:08 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:18:38 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,16 @@ void	ft_exit(int i)
 			if (g_shell.tab_proc[i].nb_tokens > 2)
 			{
 				print_error("exit: ", "too many arguments\n", NULL);
+				g_shell.error = 1;
 				return ;
 			}
 		}
 		else
+		{
 			print_error("exit: ", g_shell.tab_proc[i].tab_token[1].word,
 				": numeric argument required\n");
+				new_exit = 2;
+		}
 	}
 	ft_free(g_shell.gc);
 	ft_free(g_shell.gc2);

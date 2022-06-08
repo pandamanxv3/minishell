@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:38:31 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 14:32:55 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 01:12:05 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 extern t_minishell	g_shell;
 
-void	ft_echo(int i, int n)
+static int	n_or_not(int i, int n)
 {
-	int	j;
 	int	type;
-
+	int	j;
+	
 	j = 0;
 	type = g_shell.tab_proc[i].tab_token[j].type;
 	g_shell.error = 0;
@@ -30,16 +30,32 @@ void	ft_echo(int i, int n)
 		if (j < g_shell.tab_proc[i].nb_tokens)
 			type = g_shell.tab_proc[i].tab_token[j].type;
 	}
+	return (n);
+}
+
+void	ft_echo(int i, int j, int space)
+{
+	int	type;
+
+	while ( g_shell.tab_proc[i].tab_token[j].type != WORD
+		&& j < g_shell.tab_proc[i].nb_tokens)
+		j++;
+	type = g_shell.tab_proc[i].tab_token[j].type;
 	while (j < g_shell.tab_proc[i].nb_tokens)
 	{
+		if (type == WORD || type == WORD_N)
+			space += 1;
+		if (space == 1)
+		{
+			space -= 1;
+			printf(" ");
+		}
 		if (type == WORD || type == WORD_N)
 			printf("%s", g_shell.tab_proc[i].tab_token[j].word);
 		j++;
 		if (j < g_shell.tab_proc[i].nb_tokens)
-			printf(" ");
-		if (j < g_shell.tab_proc[i].nb_tokens)
 			type = g_shell.tab_proc[i].tab_token[j].type;
 	}
-	if (n == 1)
+	if (n_or_not(i, 1) == 1)
 		printf("\n");
 }

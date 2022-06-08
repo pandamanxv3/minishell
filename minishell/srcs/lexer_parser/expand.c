@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 18:50:10 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 17:39:41 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:12:10 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,50 @@ int	gestion_var_size(int j, int k)
 	return (0);
 }
 
+static int	on_simple_quote_var(void)
+{
+	int count;
+
+	count = 1;
+	g_shell.index_hd++;
+	while (g_shell.line[g_shell.index_hd] != '\'')
+	{
+		count++;
+		g_shell.index_hd++;
+	}
+	g_shell.index_hd++;
+	return (count + 1);
+
+}
+
+static int copy_on_simple_quote_var(char *str)
+{
+	int	i;
+
+	i = 0;
+	str[i++] = g_shell.line[g_shell.index_hd++];
+	while (g_shell.line[g_shell.index_hd] != '\'')
+	{
+		str[i++] = g_shell.line[g_shell.index_hd++];
+	}
+	str[i++] = g_shell.line[g_shell.index_hd++];
+	return(i);
+}
+
 void	size_expand(int i, int count)
 {
 	char	*str;
+	int		double_quote;
 
+	double_quote = 0;
 	g_shell.index_hd = 0;
 	while (g_shell.line[g_shell.index_hd])
 	{
-		if (g_shell.line[g_shell.index_hd] == '$')
+		if (g_shell.line[g_shell.index_hd] ==  '"')
+			double_quote++;
+		if (g_shell.line[g_shell.index_hd] ==  '\'' && double_quote % 2 == 0)
+			count += on_simple_quote_var();
+		else if (g_shell.line[g_shell.index_hd] == '$')
 			count += gestion_var_size(0, 0);
 		else
 		{
@@ -125,9 +161,14 @@ void	size_expand(int i, int count)
 	str = ft_malloc("str", count, "expand malloc failed", g_shell.gc2);
 	str[count] = '\0';
 	g_shell.index_hd = 0;
+	double_quote = 0;
 	while (i < count)
 	{
-		if (g_shell.line[g_shell.index_hd] == '$')
+		if (g_shell.line[g_shell.index_hd] ==  '"')
+			double_quote++;
+		if (g_shell.line[g_shell.index_hd] ==  '\'' && double_quote % 2 == 0)
+			i += copy_on_simple_quote_var(str + i);
+		else if (g_shell.line[g_shell.index_hd] == '$')
 			i += setup_copy_var(str + i);
 		else
 			str[i++] = g_shell.line[g_shell.index_hd++];

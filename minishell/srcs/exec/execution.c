@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 18:16:36 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 01:54:22 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,16 @@ static void	ft_execve(int i, int j)
 			if (g_shell.tab_proc[i].tab_token[j].word[0])
 			{
 				g_shell.error = 127;	
-		// 		write(2, "command not found: ", 19);
+				write(2, "command not found: ", 19);
 			}
 			else
 			{
 		 		g_shell.error = 1;
-		// 		write(2, "permission denied:", 18);
+				write(2, "permission denied:", 18);
 			}
-		// 	write(2, g_shell.tab_proc[i].tab_token[j].word,
-		// 		ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
-		// 	write(2, "\n", 1);
-			perror(g_shell.tab_proc[i].tab_token[j].word);
+			write(2, g_shell.tab_proc[i].tab_token[j].word,
+				ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
+			write(2, "\n", 1);
 			ft_free(g_shell.gc2);
 			ft_free(g_shell.gc);
 			exit (g_shell.error);
@@ -88,12 +87,12 @@ static int	cmd_or_built(int i)
 	exit (0);
 }
 
-static int	dup_builtin(int i, int j, int save_in)
+static int	dup_builtin(int i, int j, int save_in, int save_out)
 {
-	int	save_out;
-
-	if (g_shell.tab_proc[i].tab_token[j].type == COMMAND)
+	if (g_shell.tab_proc[i].tab_token[j].type == COMMAND
+		|| val_strncmp("echo", g_shell.tab_proc[i].tab_token[j].word, 4) == 0)
 		return (1);
+	puts("salut");
 	exec_fd(i, 1, 0);
 	if (g_shell.tab_proc[i].in_fd >= 0)
 	{
@@ -131,7 +130,7 @@ void	dispatch_exec(int i, int j)
 				&& g_shell.tab_proc[i].tab_token[j].type != BUILTIN
 				&& g_shell.tab_proc[i].tab_token[j].type != COMMAND)
 				j++;
-			if (dup_builtin(i, j, 0) == 0)
+			if (dup_builtin(i, j, 0, 0) == 0)
 				return ;
 		}
 		g_shell.pid[i] = fork();

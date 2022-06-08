@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_dispatcher.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/03 17:30:02 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 01:09:12 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	builtin_share(int i, int j)
 		printf("%s\n", g_shell.pwd);
 	}	
 	else if (val_strncmp("echo", builtin, 4) == 0)
-		ft_echo(i, 1);
+		ft_echo(i, 0, -1);
 	else if (val_strncmp("env", builtin, 3) == 0)
 		print_env(g_shell.lst_env);
 	else if (val_strncmp("exit", builtin, 4) == 0)

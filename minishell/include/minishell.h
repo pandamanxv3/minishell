@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/07 17:26:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/08 00:55:41 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	replace_env(char *word, int i);
 /* BUILTINS */
 
 void	ft_export(char *word);
-void	ft_echo(int i, int n);
+void	ft_echo(int i, int n, int space);
 void	unset(char *str);
 void	print_env(t_env *env);
 void	ft_pwd(void);
