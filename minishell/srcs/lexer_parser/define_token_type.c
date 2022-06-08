@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_token_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:46:04 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 03:14:46 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:43:09 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ extern t_minishell	g_shell;
 static int	is_separator(int i, int j)
 {
 	char	*str;
-	
+
 	str = g_shell.tab_proc[i].tab_token[j].word;
 	if ((str[0] == '<' || str[0] == '>') && str[1] == '\0')
 	{
 		g_shell.tab_proc[i].tab_token[j].type = SEPARATOR;
 		if (str[0] == '<')
-			return (0);			
+			return (0);
 		if (str[0] == '>')
-			return(2);
+			return (2);
 	}
 	if (str[0] == '<' && str[1] == '<')
 	{
@@ -39,7 +39,6 @@ static int	is_separator(int i, int j)
 	}
 	return (1);
 }
-
 
 static int	is_builtin(int i, int j)
 {
@@ -72,7 +71,7 @@ static void	file_types(int i, int j, int r)
 	if (r == 3)
 		g_shell.tab_proc[i].tab_token[j].type = HEREDOC;
 	if (r == 4)
-		g_shell.tab_proc[i].tab_token[j].type = OUTFILE_APPEND;	
+		g_shell.tab_proc[i].tab_token[j].type = OUTFILE_APPEND;
 }
 
 static int	only_n(char *str)
@@ -97,9 +96,7 @@ static void	word_or_word_n(int i, int j)
 	int		return_word_n;
 
 	str = g_shell.tab_proc[i].tab_token[j].word;
-	//printf("INDEX TOKEN SUIVANT ECHO: %d\n", j);
 	return_word_n = only_n(str);
-	//printf("WORD or WORD_N retour: %d\n", return_word_n);
 	if (str[0] == '-' && return_word_n == 0)
 		g_shell.tab_proc[i].tab_token[j].type = WORD_N;
 	else
@@ -112,27 +109,10 @@ static void	builtin_or_command(int i, int j)
 
 	return_builtin = is_builtin(i, j);
 	if (return_builtin != 1)
-	{
 		g_shell.tab_proc[i].tab_token[j].type = BUILTIN;
-		// if (return_builtin == 2)
-		// 	word_or_word_n(i, j + 1);
-	}
 	else
 		g_shell.tab_proc[i].tab_token[j].type = COMMAND;
 }
-
-/* TEST POUR VERIF LES TYPES */
-// static void	print_type(int i)
-// {
-// 	int	j;
-
-// 	j = 0;
-// 	while (j < g_shell.tab_proc[i].nb_tokens)
-// 	{
-// 		printf("TOKEN[%d][%d] %s TYPE IS: %d\n", i, j, g_shell.tab_proc[i].tab_token[j].word, g_shell.tab_proc[i].tab_token[j].type);
-// 		j++;		
-// 	}
-// }
 
 void	all_token_types(void)
 {
@@ -140,7 +120,7 @@ void	all_token_types(void)
 	int	i;
 	int	is_command;
 	int	return_sep;
-	
+
 	i = 0;
 	while (i < g_shell.nb_proc)
 	{
@@ -152,13 +132,13 @@ void	all_token_types(void)
 			if (return_sep != 1)
 			{
 				j++;
-				file_types(i, j, return_sep);		
+				file_types(i, j, return_sep);
 			}
 			else if (is_command == 0)
 			{
 				is_command = 1;
 				builtin_or_command(i, j);
-				if (g_shell.tab_proc[i].nb_tokens <= j - 1 
+				if (g_shell.tab_proc[i].nb_tokens <= j - 1
 					&& g_shell.tab_proc[i].tab_token[j + 1].type == WORD_N)
 					j++;
 			}
@@ -166,7 +146,6 @@ void	all_token_types(void)
 				word_or_word_n(i, j);
 			j++;
 		}
-		// print_type(i);
 		i++;
 	}
 }
