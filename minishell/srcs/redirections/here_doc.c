@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:16:20 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 04:45:04 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:25:52 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,37 @@ static void	ft_heredoc2(char *file_name, int i)
 	free(file_name);
 }
 
+char	*new_enumerated_empty_file(char *prefix, int sequence)
+{
+	char	*file_name;
+	char	*suffix_name;
+	int		fd;
+
+	//printf("PREFIX: %s\n", prefix);
+	//printf("INT SEQUENCE: %d\n", sequence);
+	while (++sequence)
+	{
+		//printf("PREFIX: %s\n", prefix);
+		//printf("INT SEQUENCE: %d\n", sequence);
+		suffix_name = ft_itoa(sequence);
+		if (!suffix_name)
+			mallocreturn_failed(g_shell.gc2, g_shell.gc, "mal itoa failed");
+		file_name = ft_strjoin(prefix, suffix_name);
+		if (!file_name)
+			mallocreturn_failed(g_shell.gc2, g_shell.gc, "mal strjoin failed");
+		free(suffix_name);
+		fd = is_file_created_successfully(file_name);
+		if (fd != -5)
+		{
+			close(fd);
+			//printf("FILE NAME: %s\n", file_name);
+			return (file_name);
+		}
+		free(file_name);
+	}
+	return (NULL);
+}
+
 void	ft_heredoc(char *limiter, int i)
 {
 	char	*tmp;
@@ -32,9 +63,12 @@ void	ft_heredoc(char *limiter, int i)
 	int		size;
 	char	*file_name;
 
+	//printf("MON char limiteur: %s\n", limiter);
 	size = ft_strlen(limiter);
 	file_name = new_enumerated_empty_file("/tmp/tempheredoc", 0);
+	printf("FILE NAME: %s\n", file_name);
 	fd = ft_open(file_name, 1);
+	//printf("FD return open: %d\n", fd);
 	while (1)
 	{
 		tmp = readline("> ");
@@ -55,9 +89,11 @@ int	is_file_created_successfully(char *file_name)
 {
 	int	fd;
 
-	if (access(file_name, W_OK) != 0)
+	if (access(file_name, F_OK) != 0)
 	{
+		printf("file name: %s\n", file_name);
 		fd = open(file_name, O_WRONLY | O_CREAT, 0666);
+		printf("FD return open: %d\n", errno);
 		if (fd < 1)
 		{
 			free(file_name);
@@ -68,31 +104,6 @@ int	is_file_created_successfully(char *file_name)
 	return (-5);
 }
 
-char	*new_enumerated_empty_file(char *prefix, int sequence)
-{
-	char	*file_name;
-	char	*suffix_name;
-	int		fd;
-
-	while (++sequence)
-	{
-		suffix_name = ft_itoa(sequence);
-		if (!suffix_name)
-			mallocreturn_failed(g_shell.gc2, g_shell.gc, "mal itoa failed");
-		file_name = ft_strjoin(prefix, suffix_name);
-		if (!file_name)
-			mallocreturn_failed(g_shell.gc2, g_shell.gc, "mal strjoin failed");
-		free(suffix_name);
-		fd = is_file_created_successfully(file_name);
-		if (fd != -5)
-		{
-			close(fd);
-			return (file_name);
-		}
-		free(file_name);
-	}
-	return (NULL);
-}
 
 void	dispatch_here_doc(int i, int j)
 {
@@ -115,7 +126,10 @@ void	dispatch_here_doc(int i, int j)
 		while (j < g_shell.tab_proc[i].nb_tokens)
 		{
 			if (g_shell.tab_proc[i].tab_token[j].type == HEREDOC)
-				ft_heredoc(g_shell.tab_proc[i].tab_token[j].word, i);
+			{
+				//printf("Je rentre car mon token est un HEREDOC\n");
+				ft_heredoc(g_shell.tab_proc[i].tab_token[j].word, i);				
+			}
 			j++;
 		}
 		g_shell.tab_proc[i].index = 0;
