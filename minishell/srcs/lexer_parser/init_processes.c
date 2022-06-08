@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_processes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 11:28:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/06 17:54:18 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:46:36 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 extern t_minishell	g_shell;
 
-int create_proc_str(int i)
+int	create_proc_str(int i)
 {
 	int	j;
 	int	k;
 	int	l;
-	
+
 	j = g_shell.tab_proc[i].start;
 	k = g_shell.tab_proc[i].end;
 	l = 0;
 	g_shell.tab_proc[i].strlen = k - j;
 	g_shell.tab_proc[i].index = 0;
-	g_shell.tab_proc[i].str = ft_malloc("str", g_shell.tab_proc[i].strlen, "malloc processor str failed", g_shell.gc2);
+	g_shell.tab_proc[i].str = ft_malloc("str", g_shell.tab_proc[i].strlen,
+			"malloc processor str failed", g_shell.gc2);
 	while (l < g_shell.tab_proc[i].strlen)
 	{
 		g_shell.tab_proc[i].str[l] = g_shell.line[j];
@@ -40,8 +41,7 @@ int	init_processes(void)
 {
 	int	i;
 	int	j;
-	int index;
-	//int	l;
+	int	index;
 
 	index = 0;
 	i = 0;
@@ -59,12 +59,14 @@ int	init_processes(void)
 		if (create_proc_str(i) == 1)
 			return (1);
 		find_nb_tokens(i);
-		g_shell.tab_proc[i].tab_token = malloc(sizeof(t_token) * (g_shell.tab_proc[i].nb_tokens + 1));
+		g_shell.tab_proc[i].tab_token = malloc(sizeof(t_token)
+				* (g_shell.tab_proc[i].nb_tokens + 1));
 		if (!g_shell.tab_proc[i].tab_token)
-			mallocreturn_failed(g_shell.gc, g_shell.gc2, "t_token malloc failed");
+			mallocreturn_failed(g_shell.gc, g_shell.gc2,
+				"t_token malloc failed");
 		else
-			ft_gcadd_back(g_shell.gc2, ft_gcnew(g_shell.tab_proc[i].tab_token, g_shell.gc2));
-		//printf("NB TOKEN : %d\n", g_shell.tab_proc[i].nb_tokens);
+			ft_gcadd_back(g_shell.gc2,
+				ft_gcnew(g_shell.tab_proc[i].tab_token, g_shell.gc2));
 		g_shell.tab_proc[i].in_fd = STDIN_FILENO;
 		g_shell.tab_proc[i].out_fd = STDOUT_FILENO;
 		i++;
