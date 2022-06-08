@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:05:33 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 04:50:45 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 05:02:30 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,30 @@
 
 extern t_minishell	g_shell;
 
+static void	builtin_share4(int i, int count, int first_word)
+{
+	if (count == 0)
+		ft_chdir(NULL);
+	if (first_word != -1
+		&& g_shell.tab_proc[i].tab_token[first_word].word[0] == '-')
+	{
+		g_shell.error = 2;
+		ft_putendl_fd("cd: invalid option", 2);
+		return ;
+	}
+	if (count == 1)
+		ft_chdir(g_shell.tab_proc[i].tab_token[first_word].word);
+	if (count > 1)
+	{
+		g_shell.error = 1;
+		ft_putendl_fd("cd: too many arguments", 2);
+	}	
+}
+
 static void	builtin_share3(int i, int j, int count)
 {
 	int		first_word;
-	
+
 	first_word = -1;
 	g_shell.error = 0;
 	if (val_strncmp("cd", g_shell.tab_proc[i].tab_token[j].word, 2) == 0)
@@ -33,21 +53,7 @@ static void	builtin_share3(int i, int j, int count)
 			}
 			j++;
 		}
-		if (count == 0)
-			ft_chdir(NULL);
-		if (first_word != -1 && g_shell.tab_proc[i].tab_token[first_word].word[0] == '-')
-		{
-			g_shell.error = 2;
-			ft_putendl_fd("cd: invalid option", 2);
-			return ;
-		}
-		if (count == 1)
-			ft_chdir(g_shell.tab_proc[i].tab_token[first_word].word);
-		if (count > 1)
-		{
-			g_shell.error = 1;
-			ft_putendl_fd("cd: too many arguments", 2); 			
-		}
+		builtin_share4(i, count, first_word);
 	}
 }
 
@@ -92,5 +98,5 @@ void	builtin_share(int i, int j)
 	else if (val_strncmp("exit", builtin, 4) == 0)
 		ft_exit(i, 0);
 	else
-	 builtin_share2(i, j, builtin);
+		builtin_share2(i, j, builtin);
 }
