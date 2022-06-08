@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+         #
+#    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
-#    Updated: 2022/06/08 05:18:23 by aboudjel         ###   ########.fr        #
+#    Updated: 2022/06/08 17:41:08 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ C_FILES =	srcs/minishell.c \
 			srcs/exec/get_tab_exec.c
 CC = cc
 
-CFLAGS = -Werror -Wall -Wextra -g -g3 
+CFLAGS = -Werror -Wall -Wextra -g3 
 
 RM = rm -f
 
