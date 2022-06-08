@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_handlers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:30:17 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 05:23:29 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:13:46 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	sighandler_int(int signum)
 	{
 		g_shell.is_in_hd = 2;
 		g_shell.save_in = dup(STDIN_FILENO);
+		g_shell.error = 130;
 		printf("\n");
 		close(STDIN_FILENO);
 		rl_replace_line("", 0);
