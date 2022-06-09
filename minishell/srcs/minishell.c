@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 22:37:47 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/09 11:51:43 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ int	parsing_prompt(void)
 	return (0);
 }
 
+static void	check_if_parsing_valid(void)
+{
+	if (lexer_prompt() == 0)
+	{
+		if (parsing_prompt() == 0)
+		{
+			dispatch_here_doc(0, 0);
+			if (g_shell.is_in_hd != 2)
+				dispatch_exec(0, 0);
+		}
+	}	
+}
+
 void	minishell(int i)
 {
 	signal(SIGINT, sighandler_int);
@@ -55,15 +68,7 @@ void	minishell(int i)
 		ft_gcadd_back(g_shell.gc2, ft_gcnew(g_shell.line, g_shell.gc2));
 		if (i++ == 0)
 			ft_pwd();
-		if (lexer_prompt() == 0)
-		{
-			if (parsing_prompt() == 0)
-			{
-				dispatch_here_doc(0, 0);
-				if (g_shell.is_in_hd != 2)
-					dispatch_exec(0, 0);
-			}
-		}
+		check_if_parsing_valid();
 		ft_free(g_shell.gc2);
 	}
 }
