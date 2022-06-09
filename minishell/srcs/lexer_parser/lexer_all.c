@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:41:48 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 22:10:10 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/09 12:02:58 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,29 +106,20 @@ static int	lexer_quote_and_pipe(void)
 		{
 			i = lexer_redir(i);
 			if (i == -1)
-			{
-				g_shell.error = 2;
 				return (3);
-			}
 			i--;
 		}
 		if (g_shell.line[i] == '"' || g_shell.line[i] == '\'')
 		{
 			i = lexer_quote(i);
 			if (i == -1)
-			{
-				g_shell.error = 130;
 				return (1);
-			}
 		}
 		if (g_shell.line[i] == '|')
 		{
 			i = lexer_pipe(i, k++);
 			if (i == -1)
-			{
-				g_shell.error = 2;
 				return (2);
-			}
 			i--;
 		}
 		i++;
@@ -163,11 +154,20 @@ int	lexer_prompt(void)
 	if (return_lexer == 1 || return_lexer == 2 || return_lexer == 3)
 	{
 		if (return_lexer == 1)
-			printf("syntax error on quotation marks\n");
+		{
+			g_shell.error = 130;
+			printf("minishell: syntax error on quotation marks\n");
+		}
 		if (return_lexer == 2)
-			printf("syntax error near unexpected token `|'\n");
+		{
+			g_shell.error = 2;
+			printf("minishell: syntax error near unexpected token `|'\n");
+		}
 		if (return_lexer == 3)
-			printf("syntax error near unexpected token `newline'\n");
+		{
+			g_shell.error = 2;
+			printf("minishell: syntax error near unexpected token `newline'\n");
+		}
 		return (1);
 	}
 	return (0);
