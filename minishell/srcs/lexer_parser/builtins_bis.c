@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_bis.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 21:34:41 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/09 17:46:46 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_pwd(void)
 	char	*buffer;
 
 	buffer = ft_malloc("str", PATH_MAX + 1,
-			"error malloc buffer pwd", g_shell.gc2);
+			"error malloc buffer pwd", g_shell.gc);
 	if (!getcwd(buffer, PATH_MAX + 1))
 		return ;
 	g_shell.pwd = ft_strdup(buffer);
@@ -70,10 +70,11 @@ void	ft_chdir(char *path)
 		ft_pwd();
 		tempo = g_shell.pwd;
 	}
-	return_chdir = chdir(path);
-	if (return_chdir == -1)
+	if (path)
+		return_chdir = chdir(path);
+	if (!path || return_chdir == -1)
 	{
-		if (open(path, O_RDONLY) == -1)
+		if (!path || open(path, O_RDONLY) == -1)
 		{
 			if (path == NULL)
 			{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/09 11:51:43 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:37:49 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,21 @@ void	minishell(int i)
 
 int	main(int argc, char **argv, char *env[])
 {
+	char	*str;
+
 	(void)argc;
 	(void)argv;
 	g_shell.gc = ft_gcnew(NULL, NULL);
+	g_shell.gc2 = NULL;
 	g_shell.lst_env = get_env(env, g_shell.gc);
+	if (!g_shell.lst_env)
+	{
+		ft_pwd();
+		str = ft_strjoin("PWD=", g_shell.pwd);
+		if (!str)
+			ft_error("error strjoin du main");
+		ft_export(str);
+		ft_export("SHLVL=1");
+	}
 	minishell(0);
 }

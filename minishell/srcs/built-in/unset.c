@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:31:05 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 03:42:35 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:23:23 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	unset(char *str)
 		return ;
 	if (!g_shell.lst_env)
 		return ;
-	if (val_strncmp(str, "PWD", ft_strlen(str)) && g_shell.unset_pwd != -1)
+	if (val_strncmp("PWD", str, ft_strlen(str)) == 0 && g_shell.unset_pwd != -1)
 		g_shell.unset_pwd = 1;
-	if (val_strncmp(str, "OLDPWD", ft_strlen(str)))
+	if (val_strncmp("OLDPWD", str, ft_strlen(str)) == 0)
 		g_shell.unset_pwd = -1;
 	while (str[i])
 	{

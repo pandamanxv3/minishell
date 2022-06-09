@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 05:15:08 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:34:38 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static int	cmd_or_built(int i)
 	if (g_shell.tab_proc[i].tab_token[j].type == BUILTIN
 		|| g_shell.tab_proc[i].tab_token[j].type == COMMAND)
 		return (1);
+	exec_fd(i, 0, 0);
 	ft_free(g_shell.gc2);
 	ft_free(g_shell.gc);
 	exit (0);
