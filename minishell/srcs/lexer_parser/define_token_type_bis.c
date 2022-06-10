@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 18:56:09 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/10 18:57:04 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/10 19:02:04 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_minishell	g_shell;
 
-static int	is_separator(int i, int j)
+int	is_separator(int i, int j)
 {
 	char	*str;
 
@@ -40,7 +40,7 @@ static int	is_separator(int i, int j)
 	return (1);
 }
 
-static int	is_builtin(int i, int j)
+int	is_builtin(int i, int j)
 {
 	char	*str;
 
@@ -62,7 +62,7 @@ static int	is_builtin(int i, int j)
 	return (1);
 }
 
-static void	file_types(int i, int j, int r)
+void	file_types(int i, int j, int r)
 {
 	if (r == 0)
 		g_shell.tab_proc[i].tab_token[j].type = INFILE;
