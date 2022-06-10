@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/10 18:26:49 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/10 19:02:47 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,11 @@ void	find_nb_tokens(int j);
 void	all_token_types(void);
 void	copy_token(int i, int j, char *str);
 void	val_strlcpy(char *dst, char *src, int size);
+void	file_types(int i, int j, int r);
 int		size_error(void);
 int		itoa_remixed(char *dst);
+int		is_separator(int i, int j);
+int		is_builtin(int i, int j);
 
 /* ENV */
 
