@@ -6,7 +6,7 @@
 #    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
-#    Updated: 2022/06/08 17:41:08 by cbarbit          ###   ########.fr        #
+#    Updated: 2022/06/10 18:39:36 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/define_token_type.c \
 			srcs/lexer_parser/builtins_bis.c \
 			srcs/lexer_parser/utils_parsing.c \
+			srcs/lexer_parser/builtins_utils.c \
 			srcs/exec/execution.c \
 			srcs/exec/utils_exec.c \
 			srcs/exec/get_tab_exec2.c \
