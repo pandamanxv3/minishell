@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/09 18:37:59 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:26:49 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ void	ft_pwd(void);
 void	ft_chdir(char *path);
 void	builtin_share(int i, int j);
 void	ft_exit(int i, int new_exit);
+void	read_and_replace_env_cd(char *var, char *val);
+char	*get_home_val(void);
 
 /* MAIN FUNCS*/
 
