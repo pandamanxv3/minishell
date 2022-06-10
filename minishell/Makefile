@@ -6,7 +6,7 @@
 #    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
-#    Updated: 2022/06/10 19:01:26 by cbarbit          ###   ########.fr        #
+#    Updated: 2022/06/10 19:26:53 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/signals_handlers.c \
 			srcs/lexer_parser/init_processes.c \
 			srcs/lexer_parser/mallocs.c \
+			srcs/lexer_parser/mallocs_bis.c \
 			srcs/lexer_parser/init_tokens.c \
 			srcs/lexer_parser/copy_tokens.c \
 			srcs/lexer_parser/define_token_type.c \
