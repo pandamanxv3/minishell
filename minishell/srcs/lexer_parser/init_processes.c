@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 11:28:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 21:46:36 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/13 12:24:22 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ int	create_proc_str(int i)
 	return (0);
 }
 
+static int	start_end_proc(int i, int j)
+{
+	if (i == 0)
+		g_shell.tab_proc[i].start = 0;
+	else
+		g_shell.tab_proc[i].start = g_shell.tab_index_pipes[i - 1] + 1;
+	if (i == (g_shell.nb_proc - 1))
+		g_shell.tab_proc[i].end = j;
+	else
+		g_shell.tab_proc[i].end = g_shell.tab_index_pipes[i];
+	if (create_proc_str(i) == 1)
+		return (1);
+	return (0);
+}
+
 int	init_processes(void)
 {
 	int	i;
@@ -48,15 +63,7 @@ int	init_processes(void)
 	j = ft_strlen(g_shell.line);
 	while (i < g_shell.nb_proc)
 	{
-		if (i == 0)
-			g_shell.tab_proc[i].start = 0;
-		else
-			g_shell.tab_proc[i].start = g_shell.tab_index_pipes[i - 1] + 1;
-		if (i == (g_shell.nb_proc - 1))
-			g_shell.tab_proc[i].end = j;
-		else
-			g_shell.tab_proc[i].end = g_shell.tab_index_pipes[i];
-		if (create_proc_str(i) == 1)
+		if (start_end_proc(i, j) == 1)
 			return (1);
 		find_nb_tokens(i);
 		g_shell.tab_proc[i].tab_token = malloc(sizeof(t_token)
