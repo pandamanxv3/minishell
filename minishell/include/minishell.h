@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/10 19:02:47 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:45:07 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,14 @@ int		gestion_var_size(int j, int k);
 int		val_strncmp(char *stra, char *val, int length);
 int		parsing_prompt(void);
 void	size_expand(int i, int count);
-int		lexer_empty_line(void);
+int		lexer_quote_and_pipe(int i, int k);
 int		setup_copy_var(char *copy);
 
 /* TOKENS */
 
 int		init_tokens(void);
-void	find_nb_tokens(int j);
-void	all_token_types(void);
+void	find_nb_tokens(int j, int i);
+void	all_token_types(int i, int j);
 void	copy_token(int i, int j, char *str);
 void	val_strlcpy(char *dst, char *src, int size);
 void	file_types(int i, int j, int r);

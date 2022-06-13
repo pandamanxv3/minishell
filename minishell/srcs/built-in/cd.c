@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_bis.c                                     :+:      :+:    :+:   */
+/*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 15:37:24 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/10 18:42:45 by cbarbit          ###   ########.fr       */
+/*   Created: 2022/06/10 18:24:57 by cbarbit           #+#    #+#             */
+/*   Updated: 2022/06/13 16:50:04 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,33 @@
 
 extern t_minishell	g_shell;
 
-void	ft_pwd(void)
+void	read_and_replace_env_cd(char *var, char *val)
 {
-	char	*buffer;
+	t_env	*current;
 
-	buffer = ft_malloc("str", PATH_MAX + 1,
-			"error malloc buffer pwd", g_shell.gc);
-	if (!getcwd(buffer, PATH_MAX + 1))
-		return ;
-	g_shell.pwd = ft_strdup(buffer);
-	if (!g_shell.pwd)
-		ft_error("error malloc du ft_pwd");
-	ft_gcadd_back(g_shell.gc, ft_gcnew(g_shell.pwd, g_shell.gc));
+	current = g_shell.lst_env;
+	while (current)
+	{
+		if (val_strncmp(var, current->var, ft_strlen(var)) == 0)
+			current->val = val;
+		current = current->next;
+	}
+}
+
+char	*get_home_val(void)
+{
+	t_env	*current;
+	char	*path;
+
+	current = g_shell.lst_env;
+	path = NULL;
+	while (current)
+	{
+		if (val_strncmp("HOME", current->var, 4) == 0)
+			path = current->val;
+		current = current->next;
+	}
+	return (path);
 }
 
 static void	check_unset_pwd_status(void)

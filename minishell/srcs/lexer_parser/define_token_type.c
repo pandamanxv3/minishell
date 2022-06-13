@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_token_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:46:04 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/13 15:28:07 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:25:02 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,10 @@ static int	check_separator(int *i, int *j)
 	return (0);
 }
 
-void	all_token_types(void)
+void	all_token_types(int i, int j)
 {
-	int	j;
-	int	i;
 	int	is_command;
 
-	i = 0;
 	while (i < g_shell.nb_proc)
 	{
 		j = 0;

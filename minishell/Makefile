@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
+#    By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/03 03:43:32 by cbarbit           #+#    #+#              #
-#    Updated: 2022/06/10 19:26:53 by cbarbit          ###   ########.fr        #
+#    Updated: 2022/06/13 16:51:07 by aboudjel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/lexer_all.c \
+			srcs/lexer_parser/lexer_bis.c \
 			srcs/lexer_parser/expand.c \
 			srcs/lexer_parser/expand_utils.c \
 			srcs/lexer_parser/env_lst.c \
@@ -25,9 +26,7 @@ C_FILES =	srcs/minishell.c \
 			srcs/lexer_parser/copy_tokens.c \
 			srcs/lexer_parser/define_token_type.c \
 			srcs/lexer_parser/define_token_type_bis.c \
-			srcs/lexer_parser/builtins_bis.c \
 			srcs/lexer_parser/utils_parsing.c \
-			srcs/lexer_parser/builtins_utils.c \
 			srcs/exec/execution.c \
 			srcs/exec/utils_exec.c \
 			srcs/exec/get_tab_exec2.c \
@@ -38,6 +37,8 @@ C_FILES =	srcs/minishell.c \
 			srcs/built-in/export.c \
 			srcs/built-in/exit.c \
 			srcs/built-in/env.c \
+			srcs/built-in/pwd.c \
+			srcs/built-in/cd.c \
 			srcs/built-in/echo.c \
 			srcs/built-in/unset.c \
 			srcs/exec/get_tab_exec.c
