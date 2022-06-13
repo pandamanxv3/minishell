@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:07:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/08 22:05:26 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/13 14:28:48 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,42 @@
 
 extern t_minishell	g_shell;
 
-void	find_nb_tokens(int j)
+static int	check_if_quotes(int j, int i)
 {
-	int	i;
+	if (g_shell.tab_proc[j].str[i] == '"')
+	{
+		i++;
+		while (g_shell.tab_proc[j].str[i] != '"')
+		{
+			i++;
+			if (g_shell.tab_proc[j].str[i] == '"')
+				break ;
+		}
+	}
+	if (g_shell.tab_proc[j].str[i] == '\'')
+	{
+		i++;
+		while (g_shell.tab_proc[j].str[i] != '\'')
+		{
+			i++;
+			if (g_shell.tab_proc[j].str[i] == '\'')
+				break ;
+		}
+	}
+	return (i);
+}
 
-	i = 0;
+static void	increase_tokens(int j, int i)
+{
+	if (g_shell.tab_proc[j].str[i] == ' '
+		|| g_shell.tab_proc[j].str[i] == '\0'
+		|| g_shell.tab_proc[j].str[i] == '>'
+		|| g_shell.tab_proc[j].str[i] == '<')
+		g_shell.tab_proc[j].nb_tokens++;
+}
+
+void	find_nb_tokens(int j, int i)
+{
 	g_shell.tab_proc[j].nb_tokens = 0;
 	while (g_shell.tab_proc[j].str[i])
 	{
@@ -38,32 +69,9 @@ void	find_nb_tokens(int j)
 			&& g_shell.tab_proc[j].str[i] != '>'
 			&& g_shell.tab_proc[j].str[i] != '<')
 		{
-			if (g_shell.tab_proc[j].str[i] == '"')
-			{
-				i++;
-				while (g_shell.tab_proc[j].str[i] != '"')
-				{
-					i++;
-					if (g_shell.tab_proc[j].str[i] == '"')
-						break ;
-				}
-			}
-			if (g_shell.tab_proc[j].str[i] == '\'')
-			{
-				i++;
-				while (g_shell.tab_proc[j].str[i] != '\'')
-				{
-					i++;
-					if (g_shell.tab_proc[j].str[i] == '\'')
-						break ;
-				}
-			}
+			i = check_if_quotes(j, i);
 			i++;
-			if (g_shell.tab_proc[j].str[i] == ' '
-				|| g_shell.tab_proc[j].str[i] == '\0'
-				|| g_shell.tab_proc[j].str[i] == '>'
-				|| g_shell.tab_proc[j].str[i] == '<')
-				g_shell.tab_proc[j].nb_tokens++;
+			increase_tokens(j, i);
 		}
 	}
 }
