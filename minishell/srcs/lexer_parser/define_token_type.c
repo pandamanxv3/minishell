@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:46:04 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/10 18:56:55 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/13 15:28:07 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,25 @@ static void	builtin_or_command(int i, int j)
 		g_shell.tab_proc[i].tab_token[j].type = COMMAND;
 }
 
+static int	check_separator(int *i, int *j)
+{
+	int	return_sep;
+
+	return_sep = is_separator(*i, *j);
+	if (return_sep != 1)
+	{
+		*j += 1;
+		file_types(*i, *j, return_sep);
+		return (1);
+	}
+	return (0);
+}
+
 void	all_token_types(void)
 {
 	int	j;
 	int	i;
 	int	is_command;
-	int	return_sep;
 
 	i = 0;
 	while (i < g_shell.nb_proc)
@@ -68,12 +81,8 @@ void	all_token_types(void)
 		is_command = 0;
 		while (j < g_shell.tab_proc[i].nb_tokens)
 		{
-			return_sep = is_separator(i, j);
-			if (return_sep != 1)
-			{
-				j++;
-				file_types(i, j, return_sep);
-			}
+			if (check_separator(&i, &j) == 1)
+				;
 			else if (is_command == 0)
 			{
 				is_command = 1;
