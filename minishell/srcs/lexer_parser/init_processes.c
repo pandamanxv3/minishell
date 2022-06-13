@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 11:28:22 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/13 12:24:22 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/06/13 14:28:39 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	init_processes(void)
 	{
 		if (start_end_proc(i, j) == 1)
 			return (1);
-		find_nb_tokens(i);
+		find_nb_tokens(i, 0);
 		g_shell.tab_proc[i].tab_token = malloc(sizeof(t_token)
 				* (g_shell.tab_proc[i].nb_tokens + 1));
 		if (!g_shell.tab_proc[i].tab_token)
