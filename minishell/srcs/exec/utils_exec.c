@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:55:17 by aboudjel          #+#    #+#             */
-/*   Updated: 2022/06/08 04:31:40 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:27:33 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,17 @@ void	ft_wait(void)
 	while (i < g_shell.nb_proc)
 	{
 		if (wait(&val) == g_shell.pid[g_shell.nb_proc - 1])
-			g_shell.error = WEXITSTATUS(val);
+		{	
+			if (WIFEXITED(val) == 1)
+				g_shell.error = WEXITSTATUS(val);
+			else
+			{
+				if (WTERMSIG(val) == 2)
+					g_shell.error = 130;
+				else
+					g_shell.error = 131;
+			}
+		}
 		i++;
 	}
 }
