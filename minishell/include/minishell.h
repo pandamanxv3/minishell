@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:09:51 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/13 18:11:38 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:44:45 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	sighandler_quit(int signum);
 
 /* LEXER & PARSER */
 
+int		lexer_empty_line(void);
 int		find_nb_proc(void);
 int		lexer_prompt(void);
 int		init_processes(void);
