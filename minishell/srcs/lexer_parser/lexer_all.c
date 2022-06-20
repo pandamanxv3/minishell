@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:41:48 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/13 16:44:45 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:45:36 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_minishell	g_shell;
 
-static int	lexer_empty_line(void)
+int	lexer_empty_line(void)
 {
 	int	i;
 
@@ -52,10 +52,7 @@ int	lexer_prompt(void)
 
 	g_shell.nb_proc = 1;
 	if (lexer_empty_line() == 1)
-	{
-		g_shell.error = 0;
 		return (1);
-	}	
 	return_lexer = lexer_quote_and_pipe(0, 0);
 	if (return_lexer == 1 || return_lexer == 2 || return_lexer == 3)
 	{

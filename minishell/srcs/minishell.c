@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:37:34 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/20 15:21:20 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:48:21 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	parsing_prompt(void)
 		return (1);
 	if (init_tokens() == 1)
 		return (1);
+	if (lexer_empty_line() == 1)
+	{
+		g_shell.error = 0;
+		return (1);
+	}	
 	all_token_types(0, 0);
 	return (0);
 }
@@ -56,7 +61,8 @@ void	minishell(int i)
 			ft_free(g_shell.gc);
 			exit(0);
 		}
-		add_history(g_shell.line);
+		if (g_shell.line[0])
+			add_history(g_shell.line);
 		g_shell.gc2 = ft_gcnew(NULL, NULL);
 		ft_gcadd_back(g_shell.gc2, ft_gcnew(g_shell.line, g_shell.gc2));
 		if (i++ == 0)

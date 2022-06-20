@@ -6,7 +6,7 @@
 /*   By: aboudjel <aboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:30:40 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/06/20 15:21:48 by aboudjel         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:34:56 by aboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,8 @@ static void	ft_execve(int i, int j)
 		if (execve(getpath(g_shell.tab_proc[i].tab_token[j].word)
 				, get_commandtab(i), get_envtab()) == -1)
 		{
-			if (g_shell.tab_proc[i].tab_token[j].word[0])
-			{
-				g_shell.error = 127;
-				write(2, "command not found: ", 19);
-			}
-			else
-			{
-				g_shell.error = 1;
-				write(2, "permission denied:", 18);
-			}
+			g_shell.error = 127;
+			write(2, "command not found: ", 19);
 			write(2, g_shell.tab_proc[i].tab_token[j].word,
 				ft_strlen(g_shell.tab_proc[i].tab_token[j].word));
 			write(2, "\n", 1);
